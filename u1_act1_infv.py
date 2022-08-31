@@ -16,7 +16,7 @@ if __name__ == "__main__":
     Persona1.nombre = "Sergio"
     Persona1.apellido = "Castelar"
     Persona1.edad = 30
+    print(Persona1.nombre)
     Persona1.ciudad = "CDMX"
 
-    print(Persona1.nombre)
     Persona.saludo()
