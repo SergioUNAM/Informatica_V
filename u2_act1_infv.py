@@ -12,6 +12,12 @@ Crear tres constructores diferentes de móvil con base a algunos atributos defin
 
 
 class Movil:
-    def __init__(self, marca, modelo):
+    def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
         self.marca = marca
         self.modelo = modelo
+        self.color = color
+        self. precio = precio
+        self.camara = camara
+        self.procesador = procesador
+        self.huella_digital = huella_digital
+        self.tipo_sensores = tipo_sensores
