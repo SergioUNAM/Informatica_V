@@ -7,7 +7,7 @@ class Auto:
         self.año = año
 
     def Encender(self):
-        pass
+        print("Auto encendido")
 
     def Arrancar(self):
         pass
@@ -21,3 +21,5 @@ if __name__ == "__main__":
     auto = Auto("Chevrolet", "Corvette", 2022)
     print()
     print("Datos del vehiculo: ", auto.marca, auto.modelo, auto.año)
+
+    auto.Encender()
