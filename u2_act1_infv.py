@@ -6,7 +6,7 @@
 
 """Crear una clase móvil que tenga los siguientes atributos “estados”: marca, modelo, color, precio, cámara, procesador, huella digital, tipo de sensores para cada uno de los atributos definir los métodos set y get.
 
-Crear en la misma clase métodos “comportamiento” como: encender, apagar, usarSensor(TIPO_SENSOR), tomarFoto(), realizarLlama(num_telefono), bloquer(), desbloquer() y otros 3 métodos que tú consideres que necesita contener.
+Crear en la misma clase métodos “comportamientos” como: encender, apagar, usarSensor(TIPO_SENSOR), tomarFoto(), realizarLlama(num_telefono), bloquear(), desbloquear() y otros 3 métodos que tú consideres que necesita contener.
 
 Crear tres constructores diferentes de móvil con base a algunos atributos definidos."""
 
@@ -21,3 +21,33 @@ class Movil:
         self.procesador = procesador
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
+
+    def encender(self):
+        pass
+
+    def apagar(self):
+        pass
+
+    def usarSensor(self,tipo_sensor):
+        pass
+
+    def tomarFoto(self):
+        pass
+
+    def realizarLlamada(self, num_telefono):
+        pass
+
+    def bloquear(self, contraseña):
+        pass
+
+    def desbloquear(self):
+        pass
+
+    def abrirApp(self):
+        pass
+
+    def subeVolumen(self):
+        pass
+
+    def bajaVolumen(self):
+        pass
