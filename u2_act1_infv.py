@@ -12,15 +12,34 @@ Crear tres constructores diferentes de móvil con base a algunos atributos defin
 
 
 class Movil:
-    def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
-        self.marca = "Apple"
-        self.modelo = "11"
-        self.color = "White"
-        self. precio = 10900
-        self.camara = "12 MP"
-        self.procesador = "A13 Bionic"
-        self.huella_digital = False
-        self.tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
+    def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
+                 huella_digital=False,
+                 tipo_sensores=None):
+        if tipo_sensores is None:
+            tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
+        self.marca = marca
+        self.modelo = modelo
+        self.color = color
+        self.precio = precio
+        self.camara = camara
+        self.procesador = procesador
+        self.huella_digital = huella_digital
+        self.tipo_sensores = tipo_sensores
+
+
+    def __init__(self, marca = "Samsung", modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
+        self.marca = marca
+        self.modelo = modelo
+        self.color = color
+        self.precio = precio
+        self.camara = camara
+        self.procesador = procesador
+        self.huella_digital = huella_digital
+        self.tipo_sensores = tipo_sensores
+
+    #Método para comprobar algunos de los datos de las instancias creadas
+    def muestra_datos(self):
+        print(self.marca, self.modelo, self.color)
 
     def encender(self):
         pass
@@ -28,7 +47,7 @@ class Movil:
     def apagar(self):
         pass
 
-    def usarSensor(self,tipo_sensor):
+    def usarSensor(self, tipo_sensor):
         pass
 
     def tomarFoto(self):
@@ -51,3 +70,7 @@ class Movil:
 
     def bajaVolumen(self):
         pass
+
+#Entry point, desde donde se ejecuta el programa principal
+if __name__ == "__main__":
+    movil1 = Movil
