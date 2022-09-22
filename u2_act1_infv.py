@@ -12,7 +12,16 @@ Crear tres constructores diferentes de móvil con base a algunos atributos defin
 
 
 class Movil:
+    # Clase movil
+
+    """ Clase que modelo un teléfono movil con los siguientes parametros:
+
+    marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores
+
+    """
+
     # Nota para contructores multiples en caso del lenguaje de programación Python
+
     """ Desafortunadamente, no podemos definir varios constructores para una sola clase en Python. Un método general para sortear esta limitación es utilizar un constructor de parámetros predeterminado. Un constructor de parámetros predeterminado es el que asigna automáticamente un valor a sus atributos de clase si no se pasa ningún parámetro al crear el objeto de clase. El constructor de parámetros predeterminado asigna el valor especificado al atributo de clase si se especifica algún valor durante la creación del objeto."""
 
     def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
@@ -20,7 +29,7 @@ class Movil:
                  tipo_sensores=None):
         if tipo_sensores is None:
             tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
-        self.marca = marca
+        self.__marca = marca  # Atributo privado
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -29,9 +38,17 @@ class Movil:
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
 
+    @property
+    def marca(self):
+        return self.__marca
+
+    @marca.setter
+    def marca(self, value):
+        self.__marca = value
+
     # Método para comprobar algunos de los datos de las instancias creadas
     def muestra_datos(self):
-        print(self.marca, self.modelo, self.color)
+        print(self.marca, self.modelo, self.color, self.tipo_sensores)
 
     def encender(self):
         pass
@@ -66,8 +83,17 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    movil1 = Movil()
-    movil1.muestra_datos()
+    Apple = Movil()
+    # Se genera el objeto con todos los datos predefinidos en el constructor
+    Apple.muestra_datos()
 
-    movil2 = Movil("Samsung")
-    movil2.muestra_datos()
+    Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
+                    ["Acelerometro, Giroscopio"])
+    Samsung.muestra_datos()
+
+    Xiaomi = Movil("Xiaomi", "Redmi note 8", "Negro", 3600, "48 MP", "Qualcomm Snapdragon 665", True,
+                   ["Sensor de proximidada", "Sensor de luz", "Acelerometro", "Giroscopio",
+                    "Lector de huellas dactilares"])
+    Xiaomi.muestra_datos()
+
+    print(Apple.marca)
