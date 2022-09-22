@@ -12,6 +12,9 @@ Crear tres constructores diferentes de móvil con base a algunos atributos defin
 
 
 class Movil:
+    # Nota para contructores multiples en caso del lenguaje de programación Python
+    """ Desafortunadamente, no podemos definir varios constructores para una sola clase en Python. Un método general para sortear esta limitación es utilizar un constructor de parámetros predeterminado. Un constructor de parámetros predeterminado es el que asigna automáticamente un valor a sus atributos de clase si no se pasa ningún parámetro al crear el objeto de clase. El constructor de parámetros predeterminado asigna el valor especificado al atributo de clase si se especifica algún valor durante la creación del objeto."""
+
     def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
                  huella_digital=False,
                  tipo_sensores=None):
