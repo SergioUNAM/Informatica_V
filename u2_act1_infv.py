@@ -26,18 +26,7 @@ class Movil:
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
 
-
-    def __init__(self, marca = "Samsung", modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
-        self.marca = marca
-        self.modelo = modelo
-        self.color = color
-        self.precio = precio
-        self.camara = camara
-        self.procesador = procesador
-        self.huella_digital = huella_digital
-        self.tipo_sensores = tipo_sensores
-
-    #Método para comprobar algunos de los datos de las instancias creadas
+    # Método para comprobar algunos de los datos de las instancias creadas
     def muestra_datos(self):
         print(self.marca, self.modelo, self.color)
 
@@ -71,6 +60,11 @@ class Movil:
     def bajaVolumen(self):
         pass
 
-#Entry point, desde donde se ejecuta el programa principal
+
+# Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    movil1 = Movil
+    movil1 = Movil()
+    movil1.muestra_datos()
+
+    movil2 = Movil("Samsung")
+    movil2.muestra_datos()
