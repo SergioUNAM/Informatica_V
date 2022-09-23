@@ -29,7 +29,7 @@ class Movil:
                  tipo_sensores=None):
         if tipo_sensores is None:
             tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
-        self.__marca = marca  # Atributo privado
+        self.marca = marca  # Atributo privado
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -38,11 +38,11 @@ class Movil:
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
 
-    @property
+    @property  # getter en python
     def marca(self):
         return self.__marca
 
-    @marca.setter
+    @marca.setter  # setter en python
     def marca(self, value):
         self.__marca = value
 
@@ -96,4 +96,5 @@ if __name__ == "__main__":
                     "Lector de huellas dactilares"])
     Xiaomi.muestra_datos()
 
-    print(Apple.marca)
+    Apple.marca = input("Digite la marca: ")
+    print(f"La marca es {Apple.marca}")
