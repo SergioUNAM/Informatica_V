@@ -24,12 +24,14 @@ class Movil:
 
     """ Desafortunadamente, no podemos definir varios constructores para una sola clase en Python. Un método general para sortear esta limitación es utilizar un constructor de parámetros predeterminado. Un constructor de parámetros predeterminado es el que asigna automáticamente un valor a sus atributos de clase si no se pasa ningún parámetro al crear el objeto de clase. El constructor de parámetros predeterminado asigna el valor especificado al atributo de clase si se especifica algún valor durante la creación del objeto."""
 
+    # Metodo constructor
     def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
                  huella_digital=False,
                  tipo_sensores=None):
         if tipo_sensores is None:
             tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
-        self.__marca = marca  # Atributo privado
+
+        self.marca = marca
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -38,6 +40,9 @@ class Movil:
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
 
+    # GETTERS Y SETTERS
+
+    # marca
     @property  # getter atributo marca
     def marca(self):
         return self.__marca
@@ -46,8 +51,37 @@ class Movil:
     def marca(self, value):
         self.__marca = value
 
-    # Método para comprobar algunos de los datos de las instancias creadas
+    # modelo
+    @property
+    def modelo(self):
+        return self.__modelo
+
+    @modelo.setter
+    def modelo(self, value):
+        self.__modelo = value
+
+    # color
+    @property
+    def color(self):
+        return self.__color
+
+    @color.setter
+    def color(self, value):
+        self.__color = value
+
+    # precio
+    @property
+    def precio(self):
+        return self.__precio
+
+    @precio.setter
+    def precio(self, value):
+        self.__precio = value
+
+
+    # Métodos de la clase Movil
     def muestra_datos(self):
+        # Método para comprobar algunos de los datos de las instancias creadas
         print(self.marca, self.modelo, self.color, self.tipo_sensores)
 
     def encender(self):
