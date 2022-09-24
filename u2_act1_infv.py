@@ -29,7 +29,7 @@ class Movil:
                  tipo_sensores=None):
         if tipo_sensores is None:
             tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
-        self.marca = marca  # Atributo privado
+        self.__marca = marca  # Atributo privado
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -38,11 +38,11 @@ class Movil:
         self.huella_digital = huella_digital
         self.tipo_sensores = tipo_sensores
 
-    @property  # getter en python
+    @property  # getter atributo marca
     def marca(self):
         return self.__marca
 
-    @marca.setter  # setter en python
+    @marca.setter  # setter atributo marca
     def marca(self, value):
         self.__marca = value
 
@@ -83,8 +83,7 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    Apple = Movil()
-    # Se genera el objeto con todos los datos predefinidos en el constructor
+    Apple = Movil()  # Se genera el objeto con todos los datos predefinidos en el constructor
     Apple.muestra_datos()
 
     Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
