@@ -24,14 +24,15 @@ class Movil:
 
     """ Desafortunadamente, no podemos definir varios constructores para una sola clase en Python. Un método general para sortear esta limitación es utilizar un constructor de parámetros predeterminado. Un constructor de parámetros predeterminado es el que asigna automáticamente un valor a sus atributos de clase si no se pasa ningún parámetro al crear el objeto de clase. El constructor de parámetros predeterminado asigna el valor especificado al atributo de clase si se especifica algún valor durante la creación del objeto."""
 
-    # Metodo constructor
+    # Metodo constructor predefinido
+
     def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
                  huella_digital=False,
                  tipo_sensores=None):
         if tipo_sensores is None:
             tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
 
-        self.marca = marca
+        self.__marca = marca
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -78,6 +79,41 @@ class Movil:
     def precio(self, value):
         self.__precio = value
 
+    # camara
+    @property
+    def camara(self):
+        return self.__camara
+
+    @camara.setter
+    def camara(self, value):
+        self.__camara = value
+
+    # procesador
+    @property
+    def procesador(self):
+        return self.__procesador
+
+    @procesador.setter
+    def procesador(self, value):
+        self.__procesador = value
+
+    # huella_digital
+    @property
+    def huella_digital(self):
+        return self.__huella_digital
+
+    @huella_digital.setter
+    def huella_digital(self, value):
+        self.__huella_digital = value
+
+    # tipo_sensores
+    @property
+    def tipo_sensores(self):
+        return self.__tipo_sensores
+
+    @tipo_sensores.setter
+    def tipo_sensores(self, value):
+        self.__tipo_sensores = value
 
     # Métodos de la clase Movil
     def muestra_datos(self):
@@ -117,7 +153,7 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    Apple = Movil()  # Se genera el objeto con todos los datos predefinidos en el constructor
+    Apple = Movil(modelo="11")  # Se genera el objeto con todos los datos predefinidos en el constructor
     Apple.muestra_datos()
 
     Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
@@ -125,9 +161,9 @@ if __name__ == "__main__":
     Samsung.muestra_datos()
 
     Xiaomi = Movil("Xiaomi", "Redmi note 8", "Negro", 3600, "48 MP", "Qualcomm Snapdragon 665", True,
-                   ["Sensor de proximidada", "Sensor de luz", "Acelerometro", "Giroscopio",
+                   ["Sensor de proximidad", "Sensor de luz", "Acelerometro", "Giroscopio",
                     "Lector de huellas dactilares"])
     Xiaomi.muestra_datos()
 
-    Apple.marca = input("Digite la marca: ")
-    print(f"La marca es {Apple.marca}")
+    movilx = Movil(modelo="1fjasoifao")
+    movilx.muestra_datos()
