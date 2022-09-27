@@ -166,4 +166,4 @@ if __name__ == "__main__":
     Xiaomi.muestra_datos()
 
     movilx = Movil(modelo="1fjasoifao")
-    movilx.muestra_datos()
+    print(movilx.marca)
