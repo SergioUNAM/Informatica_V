@@ -26,13 +26,8 @@ class Movil:
 
     # Metodo constructor predefinido
 
-    def __init__(self, marca="Apple", modelo="11", color="White", precio=10900, camara="12 MP", procesador="A14 Bionic",
-                 huella_digital=False,
-                 tipo_sensores=None):
-        if tipo_sensores is None:
-            tipo_sensores = ["Acelerometro", "Giroscopio", "Sensor de proximidad", "Sensor de luz ambiental"]
-
-        self.__marca = marca
+    def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
+        self.marca = marca
         self.modelo = modelo
         self.color = color
         self.precio = precio
@@ -118,7 +113,7 @@ class Movil:
     # Métodos de la clase Movil
     def muestra_datos(self):
         # Método para comprobar algunos de los datos de las instancias creadas
-        print(self.marca, self.modelo, self.color, self.tipo_sensores)
+        print(self.marca, self.modelo, self.color, self.precio, self.camara, self.procesador, self.huella_digital, self.tipo_sensores)
 
     def encender(self):
         pass
@@ -153,7 +148,8 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    Apple = Movil(modelo="11")  # Se genera el objeto con todos los datos predefinidos en el constructor
+    Apple = Movil(marca="Apple", modelo="11",
+                  color="blanco", precio=10999, camara="12 MP", procesador="A13 Bionic", huella_digital=False, tipo_sensores=["Luz ambiental", "Giroscopio", "Reconocimiento Facial"])  # Se genera el objeto con todos los datos predefinidos en el constructor
     Apple.muestra_datos()
 
     Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
@@ -165,5 +161,3 @@ if __name__ == "__main__":
                     "Lector de huellas dactilares"])
     Xiaomi.muestra_datos()
 
-    movilx = Movil(modelo="1fjasoifao")
-    print(movilx.marca)
