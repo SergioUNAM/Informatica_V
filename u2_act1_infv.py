@@ -1,3 +1,5 @@
+import time
+
 # Sergio Alberto Castelar Fernandez
 # Informatica V
 # Semestre 2023-1
@@ -26,15 +28,17 @@ class Movil:
 
     # Metodo constructor predefinido
 
+    on_off_estado = False
+
     def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
-        self.marca = marca
-        self.modelo = modelo
-        self.color = color
-        self.precio = precio
-        self.camara = camara
-        self.procesador = procesador
-        self.huella_digital = huella_digital
-        self.tipo_sensores = tipo_sensores
+        self.__marca = marca
+        self.__modelo = modelo
+        self.__color = color
+        self.__precio = precio
+        self.__camara = camara
+        self.__procesador = procesador
+        self.__huella_digital = huella_digital
+        self.__tipo_sensores = tipo_sensores
 
     # GETTERS Y SETTERS
 
@@ -53,25 +57,25 @@ class Movil:
         return self.__modelo
 
     @modelo.setter
-    def modelo(self, value):
+    def set_modelo(self, value):
         self.__modelo = value
 
     # color
     @property
     def color(self):
-        return self.__color
+        return self._color
 
     @color.setter
-    def color(self, value):
+    def set_color(self, value):
         self.__color = value
 
     # precio
     @property
     def precio(self):
-        return self.__precio
+        return self._precio
 
     @precio.setter
-    def precio(self, value):
+    def set_precio(self, value):
         self.__precio = value
 
     # camara
@@ -80,7 +84,7 @@ class Movil:
         return self.__camara
 
     @camara.setter
-    def camara(self, value):
+    def set_camara(self, value):
         self.__camara = value
 
     # procesador
@@ -89,7 +93,7 @@ class Movil:
         return self.__procesador
 
     @procesador.setter
-    def procesador(self, value):
+    def set_procesador(self, value):
         self.__procesador = value
 
     # huella_digital
@@ -98,7 +102,7 @@ class Movil:
         return self.__huella_digital
 
     @huella_digital.setter
-    def huella_digital(self, value):
+    def set_huella_digital(self, value):
         self.__huella_digital = value
 
     # tipo_sensores
@@ -107,22 +111,38 @@ class Movil:
         return self.__tipo_sensores
 
     @tipo_sensores.setter
-    def tipo_sensores(self, value):
+    def set_tipo_sensores(self, value):
         self.__tipo_sensores = value
 
     # Métodos de la clase Movil
-    def muestra_datos(self):
+    def muestra_informacion(self):
         # Método para comprobar algunos de los datos de las instancias creadas
-        print(self.marca, self.modelo, self.color, self.precio, self.camara, self.procesador, self.huella_digital, self.tipo_sensores)
+        print(self.marca, self.modelo, self.color, self.precio, self.camara, self.procesador, self.huella_digital,
+              self.tipo_sensores)
 
     def encender(self):
-        pass
+        if not self.on_off_estado:
+            self.on_off_estado = True
+            print("Encendiendo", end=".")
+            time.sleep(1)
+            print(".", end="")
+            time.sleep(1)
+            print(".")
+            time.sleep(1)
+            print(f"{self.marca} {self.modelo} está encendido")
+        else:
+            print(f"{self.marca} {self.modelo} está encendido")
 
     def apagar(self):
-        pass
+        if self.on_off_estado:
+            not self.on_off_estado
+            print(f"{self.__marca} {self.__modelo}, apagado")
 
-    def usarSensor(self, tipo_sensor):
-        pass
+    def usarSensor(self):
+        contador = 1
+        for sensor in self.__tipo_sensores:
+            print(f"{contador}.- {sensor}")
+            contador += 1
 
     def tomarFoto(self):
         pass
@@ -148,16 +168,19 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
-    Apple = Movil(marca="Apple", modelo="11",
-                  color="blanco", precio=10999, camara="12 MP", procesador="A13 Bionic", huella_digital=False, tipo_sensores=["Luz ambiental", "Giroscopio", "Reconocimiento Facial"])  # Se genera el objeto con todos los datos predefinidos en el constructor
-    Apple.muestra_datos()
+    Apple = Movil("Apple", "11", "blanco", 10999, "12 MP", "A13 Bionic", False,
+                  ["Luz ambiental", "Giroscopio", "Reconocimiento Facial"])
+    # Apple.muestra_informacion()
+    Apple.encender()
+    Apple.apagar()
+    Apple.usarSensor()
+    Apple.get_tipo_sensores()
 
     Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
                     ["Acelerometro, Giroscopio"])
-    Samsung.muestra_datos()
+    # Samsung.muestra_informacion()
 
     Xiaomi = Movil("Xiaomi", "Redmi note 8", "Negro", 3600, "48 MP", "Qualcomm Snapdragon 665", True,
                    ["Sensor de proximidad", "Sensor de luz", "Acelerometro", "Giroscopio",
                     "Lector de huellas dactilares"])
-    Xiaomi.muestra_datos()
-
+    # Xiaomi.muestra_informacion()
