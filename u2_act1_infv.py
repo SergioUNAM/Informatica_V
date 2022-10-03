@@ -145,7 +145,6 @@ class Movil:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, modificando brillo")
         elif sensor == 2:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, girando pantalla")
-
         elif sensor == 3:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, desbloquendo teléfono")
         print()
@@ -194,23 +193,26 @@ if __name__ == "__main__":
 
     # Funciones especificas iphone
     #La manera correcta de implentar las funciones especificas es creando una nueva clase para los telefonos apple y aplicando la herencia de la clase general Movil, para el alcance de este ejercicio se hara de esta forma
-    def cambio_de_luz_iphone():
-        Apple.usarSensor(1)
+    def utilizacion_métodos_apple():
+        def cambio_de_luz_iphone():
+            Apple.usarSensor(1)
 
-    def girar_pantalla_iphone():
-        Apple.usarSensor(2)
+        def girar_pantalla_iphone():
+            Apple.usarSensor(2)
 
-    # Utilizando los métodos solicitados
-    Apple.encender()
-    Apple.apagar()
-    Apple.desbloquear()
-    Apple.tomarFoto()
-    cambio_de_luz_iphone()
-    girar_pantalla_iphone()
-    Apple.realizarLlamada()
-    Apple.abrirApp("Facebook")
-    Apple.subeVolumen(3)
-    Apple.bajaVolumen(4)
+        # Utilizando los métodos solicitados
+        Apple.encender()
+        Apple.apagar()
+        Apple.desbloquear()
+        Apple.tomarFoto()
+        cambio_de_luz_iphone()
+        girar_pantalla_iphone()
+        Apple.realizarLlamada()
+        Apple.abrirApp("Facebook")
+        Apple.subeVolumen(3)
+        Apple.bajaVolumen(4)
+
+    utilizacion_métodos_apple()
 
 
     #Teléfono 2
