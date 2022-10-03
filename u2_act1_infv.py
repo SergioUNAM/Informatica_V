@@ -121,6 +121,7 @@ class Movil:
               self.tipo_sensores)
 
     def encender(self):
+        print("Método encender:")
         if not self.on_off_estado:
             self.on_off_estado = True
             print("Encendiendo", end=".")
@@ -132,57 +133,66 @@ class Movil:
             print(f"{self.marca} {self.modelo} está encendido")
         else:
             print(f"{self.marca} {self.modelo} está encendido")
-        print()
+        print("*" * 25)
 
     def apagar(self):
+        print("Método apagar")
         if self.on_off_estado:
             self.on_off_estado = not self.on_off_estado
             print(f"{self.__marca} {self.__modelo}, apagado")
-        print()
+        print("*" * 25)
 
     def usarSensor(self, sensor):
+        print("Método usarSensor")
         if sensor == 1:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, modificando brillo")
         elif sensor == 2:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, girando pantalla")
         elif sensor == 3:
             print(f"Utilizando el sensor {self.tipo_sensores[sensor - 1]}, desbloquendo teléfono")
-        print()
+        print("*" * 25)
 
     def tomarFoto(self):
+        print("Método tomarFoto")
         print("Iniciando cámara")
         print("Capturando imagen")
         print("Guardando imagen")
-        print()
+        print("*" * 25)
 
     def realizarLlamada(self):
-        num_telefono = input("Digite el telefono al que se desea marcar")
+        print("Método realizarLlamada")
+        num_telefono = input("Digite el telefono al que se desea marcar: ")
         print(f"Llamando al número {num_telefono}")
-        print()
+        print("*" * 25)
 
     def bloquear(self):
+        print("Método bloquear")
         print("Bloqueando teléfono")
         print("Apagando pantalla")
-        print()
+        print("*" * 25)
 
     def desbloquear(self):
+        print("Método desbloquear")
         if self.huella_digital == False:
             self.usarSensor(3)
         else:
             print("Utilizando sensor de huella digital")
-        print()
+        print("*" * 25)
 
     def abrirApp(self, nombreApp):
+        print("Método abrirApp")
         print(f"Abriendo {nombreApp}")
-        print()
+        print("*" * 25)
 
     def subeVolumen(self, niveles):
+        print("Método subeVolumen")
         print(f"Subiendo el volumen {niveles} niveles")
-        print()
+        print("*" * 25)
 
     def bajaVolumen(self, niveles):
+        print("Método bajaVolumen")
         print(f"Bajando el volumen {niveles} niveles")
-        print()
+        print("*" * 25)
 
 
 # Entry point, desde donde se ejecuta el programa principal
@@ -196,10 +206,8 @@ if __name__ == "__main__":
     def utilizacion_métodos_apple():
         def cambio_de_luz_iphone():
             Apple.usarSensor(1)
-
         def girar_pantalla_iphone():
             Apple.usarSensor(2)
-
         # Utilizando los métodos solicitados
         Apple.encender()
         Apple.apagar()
@@ -212,7 +220,13 @@ if __name__ == "__main__":
         Apple.subeVolumen(3)
         Apple.bajaVolumen(4)
 
+    # Llama a todos los métodos de la instancia iphone
     utilizacion_métodos_apple()
+
+    # Modificación de atributos mediante get y set
+    print(Apple.modelo)
+    Apple.modelo = "Iphone 13 pro max"
+    print(Apple.modelo)
 
 
     #Teléfono 2
