@@ -117,8 +117,8 @@ class Movil:
     # Métodos de la clase Movil
     def muestra_informacion(self):
         # Método para comprobar algunos de los datos de las instancias creadas
-        print(self.marca, self.modelo, self.color, self.precio, self.camara, self.procesador, self.huella_digital,
-              self.tipo_sensores)
+        print(self.__marca, self.__modelo, self.__color, self.__precio, self.__camara, self.__procesador, self.__huella_digital,
+              self.__tipo_sensores)
 
     def encender(self):
         print("Método encender:")
@@ -197,13 +197,30 @@ class Movil:
 
 # Entry point, desde donde se ejecuta el programa principal
 if __name__ == "__main__":
+
+    # Teléfono 1
+    Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
+                    ["Acelerometro, Giroscopio"])
+    print(f"Muestra información teléfono 1")
+    Samsung.muestra_informacion()
+    print()
+
+    # Teléfono 2
+    Xiaomi = Movil("Xiaomi", "Redmi note 8", "Negro", 3600, "48 MP", "Qualcomm Snapdragon 665", True,
+                   ["Sensor de proximidad", "Sensor de luz", "Acelerometro", "Giroscopio",
+                    "Lector de huellas dactilares"])
+    print(f"Muestra información teléfono 2:")
+    Xiaomi.muestra_informacion()
+    print()
+
+    # Telefono 3
     Apple = Movil("Apple", "Iphone 11", "blanco", 10999, "12 MP", "A13 Bionic", False,
                   ["Luz ambiental", "Giroscopio", "Reconocimiento Facial"])
 
 
     # Funciones especificas iphone
     #La manera correcta de implentar las funciones especificas es creando una nueva clase para los telefonos apple y aplicando la herencia de la clase general Movil, para el alcance de este ejercicio se hara de esta forma
-    def utilizacion_métodos_apple():
+    def llamado_métodos_apple():
         def cambio_de_luz_iphone():
             Apple.usarSensor(1)
         def girar_pantalla_iphone():
@@ -221,19 +238,17 @@ if __name__ == "__main__":
         Apple.bajaVolumen(4)
 
     # Llama a todos los métodos de la instancia iphone
-    utilizacion_métodos_apple()
+    llamado_métodos_apple()
 
     # Modificación de atributos mediante get y set
-    print(Apple.modelo)
+    print(f"GET\n "
+          f"Modelo:{Apple.modelo}\n"
+          f"Marca: {Apple.marca}")
+    print("Modificamos el atributo marca")
     Apple.modelo = "Iphone 13 pro max"
-    print(Apple.modelo)
 
-
-    #Teléfono 2
-    Samsung = Movil("Samsung", "A13 4G", "Negro", 3600, "50 MP", "Octa core de 2,2GHz", True,
-                    ["Acelerometro, Giroscopio"])
-
-    #Teléfono 3
-    Xiaomi = Movil("Xiaomi", "Redmi note 8", "Negro", 3600, "48 MP", "Qualcomm Snapdragon 665", True,
-                   ["Sensor de proximidad", "Sensor de luz", "Acelerometro", "Giroscopio",
-                    "Lector de huellas dactilares"])
+    # Se muestran los nuevos atributos
+    print("Mostramos los nuevos atributos")
+    print(f"GET\n "
+          f"Modelo:{Apple.modelo}\n"
+          f"Marca: {Apple.marca}")
