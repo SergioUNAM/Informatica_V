@@ -214,15 +214,25 @@ class Reloj(Wearable):
 
 
 class LentesVR(Wearable):
-    pass
+    def __init__(self, angulo_vision, resolucion):
+        self.angulo_vision = angulo_vision
+        self.resolucion = resolucion
 
 
 class Computadora(DispositivoElectronico):
-    pass
+    def __init__(self, tipo, marca, modelo, ram, tamaño_memoria):
+        self.tipo = tipo
+        self.marca = marca
+        self.modelo = modelo
+        self.ram = ram
+        self.tamaño_memoria = tamaño_memoria
 
 
 class ConsolaVideoJuego(DispositivoElectronico):
-    pass
+    def __init__(self, plataforma, almacenamiento, año_lanzamiento):
+        self.plataforma = plataforma
+        self.almacenamiento = almacenamiento
+        self.año_lanzamiento = año_lanzamiento
 
 
 def main():
