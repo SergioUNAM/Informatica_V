@@ -195,10 +195,20 @@ class Movil(DispositivoElectronico):
 
 
 class Tablet(Movil):
-    pass
+    def __init__(self, tamaño0_pantalla, capacidad_bateria):
+        self.tamaño_pantalla = tamaño0_pantalla
+        self.capacidad_bateria = capacidad_bateria
 
 
 class Wearable(Movil):
+
+
+
+class Reloj(Wearable):
+    pass
+
+
+class LentesVR(Wearable):
     pass
 
 
@@ -216,4 +226,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
