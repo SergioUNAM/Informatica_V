@@ -18,8 +18,9 @@ Realiza el código en un lenguaje orienta a objetos en un editor de textos o IDE
 
 class DispositivoElectronico:
 
-    def __init(self, num_serie):
+    def __init(self, num_serie, sistema_operativo):
         self.__num_serie = num_serie
+        self.sistema_operativo = sistema_operativo
 
 
 class Movil(DispositivoElectronico):
@@ -201,11 +202,15 @@ class Tablet(Movil):
 
 
 class Wearable(Movil):
-
+    def __int__(self, categoria, conexion):
+        self.categorio = categoria
+        self.conexion = conexion
 
 
 class Reloj(Wearable):
-    pass
+    def __int__(self, gama, peso):
+        self.gama = gama
+        self.peso = peso
 
 
 class LentesVR(Wearable):
