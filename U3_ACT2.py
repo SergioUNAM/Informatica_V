@@ -210,8 +210,9 @@ class Wearable(DispositivoElectronico, Movil):
         self.conexion = conexion
 
 
-class Reloj(Wearable):
-    def __int__(self, gama, peso):
+class Reloj(DispositivoElectronico, Movil, Wearable):
+    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion, gama, peso):
+        super().__int__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion)
         self.gama = gama
         self.peso = peso
 
