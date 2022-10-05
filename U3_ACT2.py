@@ -29,7 +29,8 @@ class Movil(DispositivoElectronico):
     on_off_estado = False
     reconocimiento_facial = False
 
-    def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
+    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores):
+        super().__init__(num_serie, sistema_operativo)
         self.__marca = marca
         self.__modelo = modelo
         self.__color = color
@@ -195,14 +196,16 @@ class Movil(DispositivoElectronico):
         print("*" * 25)
 
 
-class Tablet(Movil):
-    def __init__(self, tamaño0_pantalla, capacidad_bateria):
-        self.tamaño_pantalla = tamaño0_pantalla
+class Tablet(DispositivoElectronico, Movil):
+    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, tamaño_pantalla, capacidad_bateria):
+        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores)
+        self.tamaño_pantalla = tamaño_pantalla
         self.capacidad_bateria = capacidad_bateria
 
 
-class Wearable(Movil):
-    def __int__(self, categoria, conexion):
+class Wearable(DispositivoElectronico, Movil):
+    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion):
+        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores)
         self.categorio = categoria
         self.conexion = conexion
 
@@ -215,6 +218,7 @@ class Reloj(Wearable):
 
 class LentesVR(Wearable):
     def __init__(self, angulo_vision, resolucion):
+        super().__init__(marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores)
         self.angulo_vision = angulo_vision
         self.resolucion = resolucion
 
