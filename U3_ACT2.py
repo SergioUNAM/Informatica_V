@@ -225,14 +225,16 @@ class Reloj(DispositivoElectronico, Movil, Wearable):  # Herencia multiple pytho
 
 
 class LentesVR(DispositivoElectronico, Movil, Wearable):  # Herencia multiple python
-    def __init__(self, angulo_vision, resolucion):
-        super().__init__(marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores)
+    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
+                tipo_sensores, categoria, conexion, angulo_vision, resolucion):
+        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion)
         self.angulo_vision = angulo_vision
         self.resolucion = resolucion
 
 
 class Computadora(DispositivoElectronico):
-    def __init__(self, tipo, marca, modelo, ram, tamaño_memoria):
+    def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, ram, tamaño_memoria):
+        super().__init__(num_serie, sistema_operativo)
         self.tipo = tipo
         self.marca = marca
         self.modelo = modelo
@@ -241,7 +243,8 @@ class Computadora(DispositivoElectronico):
 
 
 class ConsolaVideoJuego(DispositivoElectronico):
-    def __init__(self, plataforma, almacenamiento, año_lanzamiento):
+    def __init__(self, num_serie, sistema_operativo, plataforma, almacenamiento, año_lanzamiento):
+        super().__init__(num_serie, sistema_operativo)
         self.plataforma = plataforma
         self.almacenamiento = almacenamiento
         self.año_lanzamiento = año_lanzamiento
