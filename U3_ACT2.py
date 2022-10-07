@@ -18,8 +18,8 @@ Realiza el código en un lenguaje orienta a objetos en un editor de textos o IDE
 
 class DispositivoElectronico:
 
-    def __init(self, num_serie, sistema_operativo):
-        self.__num_serie = num_serie
+    def __init__(self, num_serie, sistema_operativo):
+        self.num_serie = num_serie
         self.sistema_operativo = sistema_operativo
 
 
@@ -197,7 +197,7 @@ class Movil(DispositivoElectronico):
         print("*" * 25)
 
 
-class Tablet(DispositivoElectronico, Movil):
+class Tablet(Movil):
     def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
                  tipo_sensores, tamaño_pantalla, capacidad_bateria):
         super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
@@ -206,7 +206,7 @@ class Tablet(DispositivoElectronico, Movil):
         self.capacidad_bateria = capacidad_bateria
 
 
-class Wearable(DispositivoElectronico, Movil):
+class Wearable(Movil):
     def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
                 tipo_sensores, categoria, conexion):
         super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
@@ -215,7 +215,7 @@ class Wearable(DispositivoElectronico, Movil):
         self.conexion = conexion
 
 
-class Reloj(DispositivoElectronico, Movil, Wearable):  # Herencia multiple python
+class Reloj(Wearable):  # Herencia multiple python
     def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
                 tipo_sensores, categoria, conexion, gama, peso):
         super().__int__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
@@ -224,7 +224,7 @@ class Reloj(DispositivoElectronico, Movil, Wearable):  # Herencia multiple pytho
         self.peso = peso
 
 
-class LentesVR(DispositivoElectronico, Movil, Wearable):  # Herencia multiple python
+class LentesVR(Wearable):  # Herencia multiple python
     def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
                 tipo_sensores, categoria, conexion, angulo_vision, resolucion):
         super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion)
@@ -251,8 +251,11 @@ class ConsolaVideoJuego(DispositivoElectronico):
 
 
 def main():
-    pass
+    # Instanciación de un objeto de la clase Weareble
+    appleWatch = Wearable("F23IOSF", "Watch OS 7", "Apple", "Series 7", "Space Gray", 8999, "N/A", "Apple S8 (doble núcleo de 64 bits)", "N/A", ["Giroscopio", "Sensor de temperatura", "Detector de choques", "Frecuencia cardiaca"])
 
+    print(appleWatch.modelo)
+    print(appleWatch.num_serie)
 
 if __name__ == "__main__":
     main()
