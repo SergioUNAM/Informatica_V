@@ -227,7 +227,8 @@ class Reloj(Wearable):  # Herencia multiple python
 class LentesVR(Wearable):  # Herencia multiple python
     def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
                 tipo_sensores, categoria, conexion, angulo_vision, resolucion):
-        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion)
+        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
+                         tipo_sensores, categoria, conexion)
         self.angulo_vision = angulo_vision
         self.resolucion = resolucion
 
@@ -252,10 +253,14 @@ class ConsolaVideoJuego(DispositivoElectronico):
 
 def main():
     # Instanciación de un objeto de la clase Weareble
-    appleWatch = Wearable("F23IOSF", "Watch OS 7", "Apple", "Series 7", "Space Gray", 8999, "N/A", "Apple S8 (doble núcleo de 64 bits)", "N/A", ["Giroscopio", "Sensor de temperatura", "Detector de choques", "Frecuencia cardiaca"])
+    appleWatch = Wearable("F23IOSF", "Watch OS 7", "Apple", "Series 7", "Space Gray", 8999, "N/A",
+                          "Apple S8 (doble núcleo de 64 bits)", "N/A",
+                          ["Giroscopio", "Sensor de temperatura", "Detector de choques", "Frecuencia cardiaca"])
 
     print(appleWatch.modelo)
     print(appleWatch.num_serie)
+    print(appleWatch.huella_digital)
+
 
 if __name__ == "__main__":
     main()
