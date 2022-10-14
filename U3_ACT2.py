@@ -216,19 +216,21 @@ class Wearable(Movil):
 
 
 class Reloj(Wearable):  # Herencia multiple python
-    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                tipo_sensores, categoria, conexion, gama, peso):
-        super().__int__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                        tipo_sensores, categoria, conexion)
+    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion, gama, peso):
+        super().__init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion)
         self.gama = gama
         self.peso = peso
 
+    #Sobreescritura y sobrecarga del método muestra información de la clase padre Movil
+    def muestra_informacion(self):
+        super().muestra_informacion()
+
 
 class LentesVR(Wearable):  # Herencia multiple python
-    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                tipo_sensores, categoria, conexion, angulo_vision, resolucion):
-        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                         tipo_sensores, categoria, conexion)
+    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
+                 tipo_sensores, categoria, conexion, angulo_vision, resolucion):
+        super().__init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador,
+                         huella_digital, tipo_sensores, categoria, conexion)
         self.angulo_vision = angulo_vision
         self.resolucion = resolucion
 
@@ -257,6 +259,10 @@ def main():
                           "Apple S8 (doble núcleo de 64 bits)", "N/A",
                           ["Giroscopio", "Sensor de temperatura", "Detector de choques", "Frecuencia cardiaca"])
 
+    galaxyWatch = Wearable("EP43L3_302", "Wear OS", "Samsung", "Galaxy Watch5", "Negro", 5999, "N/A", "Exynos W920", "N/A", ["Frecuencia cardíaca", "Señal eléctrica cardíaca", "Bioimpedancia eléctrica", "Sensor de temperatura", "Acelerómetro", "Barómetro", "Giroscopio", "Sensor magnético"])
+
+    print(appleWatch.modelo)
+    appleWatch.muestra_informacion()
     print(appleWatch.modelo)
     print(appleWatch.num_serie)
     print(appleWatch.huella_digital)
