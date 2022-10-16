@@ -1,3 +1,4 @@
+from datetime import date
 import time
 
 
@@ -193,6 +194,28 @@ class Computadora(DispositivoElectronico):
         self.ram = ram
         self.tamaño_memoria = tamaño_memoria
     
+    def __str__(self):
+        return f"Computadora: {self.marca} {self.modelo}, {self.tipo}, {self.ram}, {self.tamaño_memoria} \n"
+
+    def verificar_estado_garantia(self):
+        print("Método verificar_estado_garantia")
+        print(f"La computadora {self.marca} {self.modelo} con número de serie {self.num_serie} tiene garantía hasta el 31 de diciembre de 2023")
+        print("Desea ampliar la garantía? (S/N)")
+        respuesta = input()
+        if respuesta == "S":
+            try:
+                print("Digite el número de meses que desea ampliar la garantía")
+                meses = int(input())
+                print(f"La garantía del producto con número de serie {self.num_serie} se ha ampliado por {meses} meses")
+                print(f"Fecha de renovación {date.today()}")
+                print(f"Graacias por confiar en nosotros")
+            except ValueError:
+                print("El número de serie y el número de meses deben ser números enteros")
+        else:
+            print("Recuerde que la garantía de su producto termina el 31 de diciembre de 2023")
+        print()
+
+
 # Clase ConsolaVideoJuego que hereda de DispositivoElectronico
 class ConsolaVideoJuego(DispositivoElectronico):
     def __init__(self, num_serie, sistema_operativo, plataforma, almacenamiento, año_lanzamiento):
@@ -200,6 +223,35 @@ class ConsolaVideoJuego(DispositivoElectronico):
         self.plataforma = plataforma
         self.almacenamiento = almacenamiento
         self.año_lanzamiento = año_lanzamiento
+
+    #Método para inicializar un juego para la consola
+    def inicializarJuego(self, nombreJuego):
+        print("Método inicializarJuego")
+        print(f"Inicializando {nombreJuego}")
+        print()
+
+    def __str__(self):
+        return f"Consola de videojuegos: {self.plataforma}, {self.almacenamiento}, {self.año_lanzamiento} \n"
+
+    #Método para actualizar el sistema operativo de la consola
+    def actualizarSistemaOperativo(self):
+        print("Método actualizarSistemaOperativo")
+        print(f"Actualizando sistema operativo {self.sistema_operativo}")
+        print("Descargando actualización")
+        print("Instalando actualización")
+        print("Reiniciando consola")
+        print("Sistema operativo actualizado")
+        print()
+
+    #Método para actualizar el juego de la consola
+    def actualizarJuego(self, nombreJuego):
+        print("Método actualizarJuego")
+        print(f"Actualizando {nombreJuego}")
+        print("Descargando actualización")
+        print("Instalando actualización")
+        print("Reiniciando consola")
+        print(f"{nombreJuego} actualizado")
+        print()
 
 # Crear una clase llamada Tablet que herede de Movil
 class Tablet(Movil):
@@ -212,10 +264,20 @@ class Tablet(Movil):
 # Crear una clase llamada Wearable que herede de Movil
 class Wearable(Movil):
     def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion):
-        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,
-                         huella_digital, tipo_sensores)
-        self.categoria = categoria
-        self.conexion = conexion
+        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,huella_digital, tipo_sensores)
+        self.__categoria = categoria
+        self.__conexion = conexion
+    
+# Getters y Setters para la clase Wearable
+
+# categoria
+    @property # getter atributo categoria
+    def categoria(self):
+        return self.__categoria
+    
+    @categoria.setter # setter atributo categoria
+    def categoria(self, value):
+        self.__categoria = value
 
 # Crear una clase llamada Reloj que herede de Wearable con los atributos adicionaes: gama y peso
 class Reloj(Wearable):
@@ -225,8 +287,73 @@ class Reloj(Wearable):
         self.gama = gama
         self.peso = peso
 
+
+    # Sobreescribir el método muestra_información de la clase Movil
+    def muestra_informacion(self):
+        print("Método muestra_informacion de la clase Reloj")
+        print(f"gama: {self.gama}, peso: {self.peso}")
+        super().muestra_informacion()
+
+    
+# Crear una clase llamada LentesVR que herede de Wearable con los atributos adicionales: tipo_lente y tipo_pantalla
+class LentesVR(Wearable):
+    def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion, tipo_lente, tipo_pantalla):
+        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,
+                         huella_digital, tipo_sensores, categoria, conexion)
+        self.__tipo_lente = tipo_lente
+        self.__tipo_pantalla = tipo_pantalla
+
+# Getters y Setters para la clase LentesVR
+# tipo_lente
+    @property # getter atributo tipo_lente
+    def tipo_lente(self):
+        return self.__tipo_lente
+
+    @tipo_lente.setter # setter atributo tipo_lente
+    def tipo_lente(self, value):
+        self.__tipo_lente = value
+
+# tipo_pantalla
+    @property # getter atributo tipo_pantalla
+    def tipo_pantalla(self):
+        return self.__tipo_pantalla
+    
+    @tipo_pantalla.setter # setter atributo tipo_pantalla
+    def tipo_pantalla(self, value):
+        self.__tipo_pantalla = value
+
+
+    # Sobreescribir el método muestra_información de la clase Movil
+    def muestra_informacion(self):
+        print("Método muestra_informacion dentro de la clase lentesVR")
+        super().muestra_informacion()
+
 def main():
-    print("tutto bene")
+
+    # Crear dos instancias de la clase Computadora
+    # Instancia 1 de la clase Computadora
+    print("Primera instancia de la clase Computadora")
+    computadora1 = Computadora("123456", "Windows", "Escritorio", "HP", "Pavilion", "8GB", "1TB")
+    print(computadora1)
+    computadora1.verificar_estado_garantia()
+
+    #Instancia 2 de la clase Computadora
+    print("Segunda instancia de la clase Computadora")
+    computadora2 = Computadora("654321", "Linux", "Portatil", "Lenovo", "Thinkpad", "16GB", "2TB")
+    print(computadora2)
+
+    #Crear dos intancias de la clase ConsolaVideoJuego
+    #Instancia 1 de la clase ConsolaVideoJuego
+    print("Primera instancia de la clase ConsolaVideoJuego")
+    consola1 = ConsolaVideoJuego("XB-1938", "Windows 10 ONECORE", "Xbox One", "2TB", "10-11-2020")
+    print(consola1)
+    consola1.actualizarSistemaOperativo()
+    consola1.actualizarJuego("Gears 5")
+
+    #Instancia 2 de la clase ConsolaVideoJuego
+    print("Segunda instancia de la clase ConsolaVideoJuego")
+    consola2 = ConsolaVideoJuego("PS-1938", "Orbis OS FreeBSD", "Playstation 4", "2TB", "15-11-2013")
+    print(consola2)
 
 #Entry point
 if __name__ == "__main__":

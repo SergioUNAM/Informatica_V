@@ -17,7 +17,7 @@ Realiza el código en un lenguaje orienta a objetos en un editor de textos o IDE
 
 
 import time
-
+import random
 
 class DispositivoElectronico:
 
@@ -262,6 +262,12 @@ class ConsolaVideoJuego(DispositivoElectronico):
         self.plataforma = plataforma
         self.almacenamiento = almacenamiento
         self.año_lanzamiento = año_lanzamiento
+    
+    #Método para inicializar un juego
+    def iniciarJuego(self):
+        catalogo = ["Halo", "Gears of War", "Forza", "Fifa", "Minecraft"]
+        #Seleccionar un juego al azar
+        juego = random.choice(catalogo)
 
 
 # Clase principal python
