@@ -1,21 +1,3 @@
-# Sergio Alberto Castelar Fernández
-# Cuenta: 309065638
-# Materia: Informática V (Programación Orientada a Objetos)
-# Unidad 3: Herencia
-# Actividad 1
-
-
-"""Empleando el mismo programa “código fuente” de la unidad 1, realiza la herencia creando una clase padre llamada DipositivoElectronico y dos clases hija (al mismo nivel de la clase Movil) llamadas: Computadora y ConsolaVideoJuego, a partir de la clase Movil crea dos subclases “clases hijas” Tablet y Warable, para la clase Warable se crean “derivan” dos clases hija una llamada Reloj y otra LentesVR. Crear para cada una de las subclases diferentes dos atributos únicos que los caractericen y crear un constructor para cada clase.
-
-
-
-Desde la clase principal crea diferentes warables relojes y lentesVR que a través del uso de la herencia puedan establecer a través de la clase padre valores como el modelo, la marca, etc. y también ocupe los métodos para acceder a los valores propios de la clase, crear en estas clases hija dos constructores y en estas clases definir un método para realizar sobre carga y otro método para realizar sobre escritura. Para la sobre escritura el mismo método debe de estar definido también en las clases padre, es decir, en las clases Móvil, Tablet y Warable. A partir de ellos crear 2 tipos de dispositivos electrónicos uno para Computadora y otro para ConsolaVideoJuego, también para las otras clases (Móvil, Tablet y Warable), utilizar los constructores y los métodos set y get; y de la relación de las clases preguntar si (if) una Tablet es un tipo de DispositivoElectronico, si un Warable es un tipo de Movil y si una Computadora es un tipo de Movil, para esto emplear instanceof o su equivalente, e imprimir la salida en pantalla.
-
-
-
-Realiza el código en un lenguaje orienta a objetos en un editor de textos o IDE, los códigos fuente comprímelos en un archivo .zip o .rar. Utiliza comentarios para poner tu nombre completo y comenta las líneas principales de cómo creaste los objetos y manejaste los constructores y los métodos, al final sube el archivo a la sección de la actividad correspondiente."""
-
-
 import time
 
 
@@ -199,53 +181,9 @@ class Movil(DispositivoElectronico):
         print(f"Bajando el volumen {niveles} niveles")
         print("*" * 25)
 
+# Crear dos clases al mismo nivel de la clase Movil llamadas Computadora y ConsolaVideojuego
 
-class Tablet(Movil):
-    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                 tipo_sensores, tamaño_pantalla, capacidad_bateria):
-        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                         tipo_sensores)
-        self.tamaño_pantalla = tamaño_pantalla
-        self.capacidad_bateria = capacidad_bateria
-
-
-class Wearable(Movil):
-    def __int__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                tipo_sensores, categoria, conexion):
-        super().__init__(num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                         tipo_sensores)
-        self.categoria = categoria
-        self.conexion = conexion
-
-class Reloj(Wearable):  # Herencia multiple python
-    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                 tipo_sensores, categoria, conexion, gama, peso):
-        super().__init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador,
-                         huella_digital, tipo_sensores)
-        super().__init__(self,categoria, conexion)
-        self.gama = gama
-        self.peso = peso
-
-    # Sobreescritura y sobrecarga del método muestra información de la clase padre Movil
-    def muestra_informacion(self):
-        super().muestra_informacion()
-
-
-#Clase LentesVR que hereda de Wearable con dos atributos adicionales
-class LentesVR(Wearable):
-    def __init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador, huella_digital,
-                 tipo_sensores, categoria, conexion, tipo_lente, tipo_pantalla):
-        super().__init__(self, num_serie, sistema_operativo, marca, modelo, color, precio, camara, procesador,
-                         huella_digital, tipo_sensores)
-        super().__init__(self, categoria, conexion)
-        self.tipo_lente = tipo_lente
-        self.tipo_pantalla = tipo_pantalla
-
-    # Sobreescritura y sobrecarga del método muestra información de la clase padre Movil
-    def muestra_informacion(self):
-        super().muestra_informacion()
-
-
+# Clase Computadora que hereda de DispositivoElectronico
 class Computadora(DispositivoElectronico):
     def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, ram, tamaño_memoria):
         super().__init__(num_serie, sistema_operativo)
@@ -254,8 +192,8 @@ class Computadora(DispositivoElectronico):
         self.modelo = modelo
         self.ram = ram
         self.tamaño_memoria = tamaño_memoria
-
-
+    
+# Clase ConsolaVideoJuego que hereda de DispositivoElectronico
 class ConsolaVideoJuego(DispositivoElectronico):
     def __init__(self, num_serie, sistema_operativo, plataforma, almacenamiento, año_lanzamiento):
         super().__init__(num_serie, sistema_operativo)
@@ -263,29 +201,34 @@ class ConsolaVideoJuego(DispositivoElectronico):
         self.almacenamiento = almacenamiento
         self.año_lanzamiento = año_lanzamiento
 
+# Crear una clase llamada Tablet que herede de Movil
+class Tablet(Movil):
+    def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, tamaño_pantalla, capacidad_bateria):
+        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,
+                         huella_digital, tipo_sensores)
+        self.tamaño_pantalla = tamaño_pantalla
+        self.capacidad_bateria = capacidad_bateria
 
-# Clase principal python
+# Crear una clase llamada Wearable que herede de Movil
+class Wearable(Movil):
+    def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion):
+        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,
+                         huella_digital, tipo_sensores)
+        self.categoria = categoria
+        self.conexion = conexion
+
+# Crear una clase llamada Reloj que herede de Wearable con los atributos adicionaes: gama y peso
+class Reloj(Wearable):
+    def __init__(self, num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador, huella_digital, tipo_sensores, categoria, conexion, gama, peso):
+        super().__init__(num_serie, sistema_operativo, tipo, marca, modelo, color, precio, camara, procesador,
+                         huella_digital, tipo_sensores, categoria, conexion)
+        self.gama = gama
+        self.peso = peso
+
 def main():
-    # Instanciación 1 de un objeto de la clase Weareable, se asignan todos los atributos heredados de la clase Movil
-    appleWatch = Wearable("F23IOSF", "Watch OS 7", "Apple", "Series 7", "Space Gray", 8999, "N/A",
-                          "Apple S8 (doble núcleo de 64 bits)", "N/A",
-                          ["Giroscopio", "Sensor de temperatura", "Detector de choques", "Frecuencia cardiaca"])
+    print("tutto bene")
 
-    # Instanciación 2 de un objeto de la clase Weareable, se asignan todos los atributos heredados de la clase Movil
-    galaxyWatch = Wearable("EP43L3_302", "Wear OS", "Samsung", "Galaxy Watch5", "Negro", 5999, "N/A", "Exynos W920",
-                           "N/A", ["Frecuencia cardíaca", "Señal eléctrica cardíaca", "Bioimpedancia eléctrica",
-                                   "Sensor de temperatura", "Acelerómetro", "Barómetro", "Giroscopio",
-                                   "Sensor magnético"])
-
-
-
-    print(appleWatch.modelo, appleWatch.marca)
-    appleWatch.muestra_informacion()
-    print(appleWatch.modelo)
-    print(appleWatch.num_serie)
-    print(appleWatch.huella_digital)
-
-
-# Entry point python
+#Entry point
 if __name__ == "__main__":
     main()
+
