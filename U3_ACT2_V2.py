@@ -1,3 +1,20 @@
+# Sergio Alberto Castelar Fernández
+# Cuenta: 309065638
+# Materia: Informática V (Programación Orientada a Objetos)
+# Unidad 3: Herencia
+# Actividad 1
+
+
+"""Empleando el mismo programa “código fuente” de la unidad 1, realiza la herencia creando una clase padre llamada DipositivoElectronico y dos clases hija (al mismo nivel de la clase Movil) llamadas: Computadora y ConsolaVideoJuego, a partir de la clase Movil crea dos subclases “clases hijas” Tablet y Warable, para la clase Warable se crean “derivan” dos clases hija una llamada Reloj y otra LentesVR. Crear para cada una de las subclases diferentes dos atributos únicos que los caractericen y crear un constructor para cada clase.
+
+
+
+Desde la clase principal crea diferentes warables relojes y lentesVR que a través del uso de la herencia puedan establecer a través de la clase padre valores como el modelo, la marca, etc. y también ocupe los métodos para acceder a los valores propios de la clase, crear en estas clases hija dos constructores y en estas clases definir un método para realizar sobre carga y otro método para realizar sobre escritura. Para la sobre escritura el mismo método debe de estar definido también en las clases padre, es decir, en las clases Móvil, Tablet y Warable. A partir de ellos crear 2 tipos de dispositivos electrónicos uno para Computadora y otro para ConsolaVideoJuego, también para las otras clases (Móvil, Tablet y Warable), utilizar los constructores y los métodos set y get; y de la relación de las clases preguntar si (if) una Tablet es un tipo de DispositivoElectronico, si un Warable es un tipo de Movil y si una Computadora es un tipo de Movil, para esto emplear instanceof o su equivalente, e imprimir la salida en pantalla.
+
+
+
+Realiza el código en un lenguaje orienta a objetos en un editor de textos o IDE, los códigos fuente comprímelos en un archivo .zip o .rar. Utiliza comentarios para poner tu nombre completo y comenta las líneas principales de cómo creaste los objetos y manejaste los constructores y los métodos, al final sube el archivo a la sección de la actividad correspondiente."""
+
 from datetime import date
 import time
 
@@ -328,25 +345,50 @@ class LentesVR(Wearable):
         print("Método muestra_informacion dentro de la clase lentesVR")
         super().muestra_informacion()
 
+#Función principal
 def main():
+
+    #Función que nos permite verificar a que clase pertenece cada instancia
+    #Lista de todas las clases creadas
+    def verificarInstancia(instancia):
+        clases = [DispositivoElectronico, Movil, Computadora, ConsolaVideoJuego, Tablet, Wearable, Reloj, LentesVR]
+        for clase in clases:
+            if isinstance(instancia, clase):
+                print(f"La instancia pertenece a la clase {clase.__name__}")
+            else:
+                continue
+        print()
 
     # Crear dos instancias de la clase Computadora
     # Instancia 1 de la clase Computadora
     print("Primera instancia de la clase Computadora")
     computadora1 = Computadora("123456", "Windows", "Escritorio", "HP", "Pavilion", "8GB", "1TB")
     print(computadora1)
+
+    # Verificamos a que instancia pertenece el objeto computadora1
+    verificarInstancia(computadora1)
+
+    # Aplicamos los metodos de la clase Computadora
     computadora1.verificar_estado_garantia()
 
     #Instancia 2 de la clase Computadora
     print("Segunda instancia de la clase Computadora")
     computadora2 = Computadora("654321", "Linux", "Portatil", "Lenovo", "Thinkpad", "16GB", "2TB")
     print(computadora2)
+    # Verificamos a que instancia pertenece el objeto computadora2
+    verificarInstancia(computadora2)
+
 
     #Crear dos intancias de la clase ConsolaVideoJuego
     #Instancia 1 de la clase ConsolaVideoJuego
     print("Primera instancia de la clase ConsolaVideoJuego")
     consola1 = ConsolaVideoJuego("XB-1938", "Windows 10 ONECORE", "Xbox One", "2TB", "10-11-2020")
     print(consola1)
+
+    #verificamos a que instancia pertenece el objeto consola1
+    verificarInstancia(consola1)
+
+    # Aplicamos los métodos de la clase ConsolaVideoJuego
     consola1.actualizarSistemaOperativo()
     consola1.actualizarJuego("Gears 5")
 
@@ -354,6 +396,8 @@ def main():
     print("Segunda instancia de la clase ConsolaVideoJuego")
     consola2 = ConsolaVideoJuego("PS-1938", "Orbis OS FreeBSD", "Playstation 4", "2TB", "15-11-2013")
     print(consola2)
+    # Verificamos a que instancia pertenece el objeto
+    verificarInstancia(consola2)
 
 #Entry point
 if __name__ == "__main__":
