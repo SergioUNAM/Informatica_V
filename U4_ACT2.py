@@ -1,3 +1,17 @@
+"""Universidad Nacional Autónoma de México
+Facultad de Contaduría y Administración
+Sistema de Universidad Abierta y Educación a Distancia
+Licenciatura en Informática
+Semestre 2023-1
+
+
+Sergio Alberto Castelar Fernández
+Cuenta: 309065638
+Materia: Informática V (Programación Orientada a Objetos)
+Unidad 4: Excepciones
+Actividad 2
+"""
+
 # Crea en una clase llamada MovilException que tenga como Padre Exception, usando el constructor de la clase Exception para crear tu propia excepción personalizada. En la clase Movil estable dos atributos (si no los tienes), bateria_serie y horas_uso con sus respectivos métodos set y get, establecer con sethorasuso() a varios modelos y crear un método revisarHorasUso(tiempo_uso) en este método establece una condicion en donde si el horas es mayor a 17,000 lance la excepción MovilException cuyo mensaje sea "Este móvil" + marca + modelo necesita que se le realice el cambio de bateria".
 
 # Desde la clase principal del código que tiene las instancias de los móviles llama al método revisarHorasUso(tiempo_uso) si ocurre la situación excepcional usa el mecanismo para cachar las excepciones por ejemplo en java (try, catch y finally) e imprime el mensaje que lanza la clasey en el finally muestra el total de móviles que debe de hacer el cambio de batería.
@@ -7,13 +21,12 @@ import random
 from re import M
 import string
 import time
-from tkinter import Tk
+
 
 
 class Exception:
     def __init__(self, message):
         self.message = message
-
 
 
 class MovilException(Exception):
@@ -28,10 +41,10 @@ class MovilException(Exception):
 class Movil:
     # Clase Movil que hereda de DispositivoElectronico
 
-    on_off_estado = False
+    on_off_estado = True
     reconocimiento_facial = False
 
-    #Constructor de la clase Movil
+    # Constructor de la clase Movil
     def __init__(self, marca, modelo, color, precio, camara, procesador, huella_digital,
                  tipo_sensores, bateria_serie, horas_uso):
 
@@ -45,27 +58,41 @@ class Movil:
         self.__tipo_sensores = tipo_sensores
         self.__bateria_serie = bateria_serie
         self.__horas_uso = horas_uso
-        
+
+    def __str__(self):
+        return f"Atributos de clase {self.__class__.__name__} Marca: {self.__marca}, Modelo: {self.modelo}, Color: {self.color}, Precio: {self.precio}, Camara: {self.camara}, Procesador: {self.procesador}, Huella digit+al: {self.huella_digital}, Sensores: {self.tipo_sensores}, Bateria: {self.bateria_serie}, Horas de uso: {self.horas_uso}"
+
+    # Metodo para crear una imagen ascii sobre el estado de la bateria del dispositivo
+    def cantidadUso(self):
+        print("Método cantidadUso")
+        if self.on_off_estado:
+            print("Cantidad de uso")
+            # Creamos una imagen ascii con la cantidad de uso de la bateria
+            for i in range(0, self.horas_uso):
+                print("=", end="")
+            print()
+        else:
+            print("El dispositivo esta apagado")
+        print()
 
     # GETTERS Y SETTERS
 
     # bateria_serie y horas_uso con sus respectivos métodos set y get
-    @property # getter bateria_serie
+    @property  # getter bateria_serie
     def bateria_serie(self):
         return self.__bateria_serie
 
-    @bateria_serie.setter # setter bateria_serie
+    @bateria_serie.setter  # setter bateria_serie
     def bateria_serie(self, bateria_serie):
         self.__bateria_serie = bateria_serie
 
-    @property # getter horas_uso
+    @property  # getter horas_uso
     def horas_uso(self):
         return self.__horas_uso
 
-    @horas_uso.setter # setter horas_uso
+    @horas_uso.setter  # setter horas_uso
     def horas_uso(self, horas_uso):
         self.__horas_uso = horas_uso
-
 
     # marca
     @property  # getter atributo marca
@@ -146,7 +173,7 @@ class Movil:
     def encender(self):
         print("Método encender")
 
-        #animamos el encendido con simbolos
+        # animamos el encendido con simbolos
         if not self.on_off_estado:
             print("Encendiendo dispositivo")
             # Simulamos el encendido con una animación con simbolos
@@ -158,8 +185,6 @@ class Movil:
         else:
             print("El dispositivo ya esta encendido")
         print()
-
-
 
     def apagar(self):
         print("Método apagar")
@@ -245,30 +270,55 @@ class Movil:
             print("El dispositivo esta apagado")
         print()
 
+    # Metodo revisarHorasUso(tiempo_uso) que establece una condición en donde si tiempo_uso es mayor a 17000 horas lance cree un instancia de la clase MovilException cuyo mensaje sea "Este móvil" + marca + modelo necesita que se le realice el cambio de bateria"
+    def revisarHorasUso(self, tiempo_uso):
+        print("Revisando horas de uso")
+        # Animamos la carga de la información
+        for i in range(1, 6):
+            print(f"{i} ...")
+            time.sleep(1)
+        if tiempo_uso > 17000:
+            try:
+                movilexception = MovilException(
+                    f"Este móvil {self.marca} {self.modelo} necesita que se le realice el cambio de bateria")
+            except:
+                print("Error en la excepción")
+            print(f"Tiempo de uso: {tiempo_uso}")
+            print(movilexception.__str__())
+
+        else:
+            print(f"Tiempo de uso: {tiempo_uso}")
+            print(f"{self.marca} {self.modelo} no necesita que se le realice el cambio de bateria")
+
 
 def main():
+    # Creamos varios objetos de la clase Movil, las lineas sentencias ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000) nos ayudan a generar valores aleatorios para los atributos num_serie y horas_uso respectivamente
 
-    # Creamos un ciclo para crear 10 moviles
-    for i in range(1, 100):
-        # Creamos un objeto movil con los atributos de la clase Movil
-        horas_uso =  int(random.randint(15000, 20000))
-        numero_serie = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-        
-        # Creamos varios objetos de la clase Movil
-        movil1 = Movil("Samsung", "Galaxy", "Negro", 5999, "12 MP", "Snapdragon 855", True,
-                   ["Brillo", "Giroscopio", "Huella digital"], numero_serie, horas_uso)
-        print(f"El numero de horas de uso del movil {movil1.marca}. {movil1.modelo} es {movil1.horas_uso}")
+    movil1 = Movil("Samsung", "Galaxy S10", "Negro", 5999, "12 MP", "Snapdragon 855", True,
+                   ["Brillo", "Giroscopio", "Huella digital"],
+                   ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000))
 
-        movil2 = Movil("Apple", "Iphone", "Blanco", 7999, "12 MP", "A13 Bionic", True,
-        
-        
-        
-        # Si random_horas_uso es mayor que 17000 creamos un objeto de la clase MovilException que recibe como parametro la siguiente cadena "Este móvil" + marca + modelo necesita que se le realice el cambio de bateria".
-        if movil.horas_uso > 17000:
-            movilException = MovilException("Este móvil " + movil.marca + " " + movil.modelo + " necesita que se le realice el cambio de bateria")
-            movilException.__str__()
-        #imprimimos el atributo horas_uso del objeto movil
-       
+    movil1.revisarHorasUso(movil1.horas_uso)
+
+    movil2 = Movil("Huawei", "P30", "Blanco", 7999, "40 MP", "Kirin 980", True,
+                   ["Brillo", "Giroscopio", "Huella digital"],
+                   ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000))
+    movil2.revisarHorasUso(movil2.horas_uso)
+
+    movil3 = Movil("Apple", "Iphone 11", "Gris", 12999, "12 MP", "A13 Bionic", True,
+                   ["Brillo", "Giroscopio", "Huella digital"],
+                   ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000))
+    movil3.revisarHorasUso(movil3.horas_uso)
+
+    movil4 = Movil("Xiaomi", "Redmi Note 8", "Azul", 3999, "48 MP", "Snapdragon 665", True,
+                   ["Brillo", "Giroscopio", "Huella digital"],
+                   ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000))
+    movil4.revisarHorasUso(movil4.horas_uso)
+
+    movil5 = Movil("Motorola", "G8", "Verde", 4999, "16 MP", "Snapdragon 665", True,
+                   ["Brillo", "Giroscopio", "Huella digital"],
+                   ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), random.randint(16700, 20000))
+    movil5.revisarHorasUso(movil5.horas_uso)
 
 
 # Entry point
