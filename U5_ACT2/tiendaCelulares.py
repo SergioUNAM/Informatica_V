@@ -1,109 +1,234 @@
+import tkinter as tk
+
 # Definimos a la clase Celular con los siguientes parametros: marca, modelo, precio, color, almacenamiento, compraSeguro, renta, compra
 class Celular:
-    def __init__(self, marca : str, modelo : str, precio : float, color : str, almacenamiento : str, compraSeguro : bool, renta : bool, compra : bool):
-        self.marca = marca
-        self.modelo = modelo
-        self.precio = precio
-        self.color = color
-        self.almacenamiento = almacenamiento
-        self.compraSeguro = compraSeguro
-        self.renta = renta
-        self.compra = compra
+    marcas = ["Apple", "Samsung", "Xiaomi", "Motorola", "Huawei"]
 
-# Definimos a la clase Compra donde se seleecionaran los celulares que se desean comprar, se mostrara el total a pagar y se le preguntara al usuario si desea realizar la compra, habra 5 marcas, 3 modelos por marca, 5 colores a elegir, 3 capacidades de almacenamiento, seguro de compra, y si renta o compra el celular
+# Definimos a la clase Compra donde se seleecionaran los celulares que se desean comprar a traves de un metodo para cada marca de celulares, se mostrara el total a pagar y se le preguntara al usuario si desea realizar la compra, habra 5 marcas, 3 modelos por marca, 5 colores a elegir, 3 capacidades de almacenamiento, seguro de compra, y si renta o compra el celular
 
 class Compra:
-    def __init__(self, inventario = {"Apple":[
-                {"Iphone 11":
-                    [{"color":
-                        ["blanco", "gris espacial", "plata", "verde medianoche", "rojo"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"Iphone 12": [{"color":
-                        ["blanco", "negro", "verde", "azul", "rojo"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"Iphone 13": [{"color":
-                        ["blanco estelar", "rosa", "verde olivo", "azul medianoche", "rojo"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]}],
-            "Samsung":[
-                {"S20":
-                    [{"color":
-                        ["blanco", "gris", "azul", "rojo", "verde"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"S21": [{"color":
-                        ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"A51": [{"color":
-                        ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]}],
-            "Huawei":[
-                {"P40":
-                    [{"color":
-                        ["blanco", "naranja", "azul", "rojo", "verde"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"P50": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"P60": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]}],
-            "Xiaomi":[
-                {"Redmi Note 9":
-                    [{"color":
-                        ["blanco", "gris", "azul", "rojo", "verde"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"Redmi Note 10": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"Redmi Note 11": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]}],
-            "Motorola":[
-                {"G10":
-                    [{"color":
-                        ["blanco", "gris", "azul", "rojo", "verde"]}, 
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"G20": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]},
-                {"G30": [{"color":
-                    ["blanco", "gris", "azul", "rojo", "verde"]},
-                    {"almacenamiento": 
-                        ["32 GB", "64 GB", "128 GB"]}]}]}, seguro = None, renta = None, compra = None):
-        self.inventario = inventario
-        self.seguro = seguro
-        self.renta = renta
-        self.compra = compra
+    def __init__(self, num_compra):
+        self.num_compra = num_compra
+        
+    #definimos el metodo ventanan donde se implementará la estructura de la interfaz grafica
+    def ventana(self):
+        #definimos la ventana
+        self.ventana = Tk()
+        self.ventana.title("Tienda de Celulares")
+        self.ventana.geometry("500x500")
+        self.ventana.resizable(0,0)
+        
+        #definimos el frame
+        self.frame = Frame(self.ventana, width=500, height=500)
+        self.frame.pack()
+        
+        #definimos el label
+        self.label = Label(self.frame, text="Bienvenido a la tienda de celulares", font=("Arial", 18))
+        self.label.place(x=100, y=20)
+        
+        #definimos el boton
+        self.boton = Button(self.frame, text="Comenzar", command=self.marca)
+        self.boton.place(x=200, y=100)
+        
+        #definimos el boton salir
+        self.boton_salir = Button(self.frame, text="Salir", command=self.ventana.destroy)
+        self.boton_salir.place(x=200, y=150)
+        
+        #definimos el boton para mostrar el carrito
+        self.boton_carrito = Button(self.frame, text="Carrito", command=self.carrito)
+        self.boton_carrito.place(x=200, y=200)
+        
+        #definimos el boton para mostrar el total a pagar
+        self.boton_total = Button(self.frame, text="Total a pagar", command=self.total)
+        self.boton_total.place(x=200, y=250)
+        
+        #definimos el boton para mostrar el total a pagar
+        self.boton_comprar = Button(self.frame, text="Comprar", command=self.comprar)
+        self.boton_comprar.place(x=200, y=300)
+        
+        #definimos el boton para mostrar el total a pagar
+        self.boton_rentar = Button(self.frame, text="Rentar", command=self.rentar)
+        self.boton_rentar.place(x=200, y=350)
+        
+        #definimos el boton para mostrar el total a pagar
+        self.boton_seguro = Button(self.frame, text="Seguro", command=self.seguro)
+        self.boton_seguro.place(x=200, y=400)
+        
+        #definimos el boton para mostrar el total a pagar
+        self.boton_celular =
 
-    # Método para mostrar el inventario de celulares
-    def mostrarInventario(self):
-        print("Inventario de celulares")
-        print("Marca\t\tModelo\t\tColor\t\tAlmacenamiento\t\tPrecio")
-        for marca in self.inventario:
-            for modelo in self.inventario[marca]:
-                for color in modelo[modelo[0]["color"][0]]:
-                    for almacenamiento in color[color[0]["almacenamiento"][0]]:
-                        print(f"{marca}\t\t{modelo}\t\t{color}\t\t{almacenamiento}\t\t${self.inventario[marca][modelo][color][almacenamiento]}")
+    def apple(self):
+        modelos_disponible = ["Iphone 11", "Iphone 12", "Iphone 13"]
+        # Damos a elegir una opción al usuario de los modelos disponibles
+        print("Modelos disponibles: ", modelos_disponible)
+        modelo = input("Elija un modelo: ")
+        # Si el modelo elegido no esta en la lista de modelos disponibles, se le pedira que elija uno de los modelos disponibles
+        while modelo not in modelos_disponible:
+            print("Elija un modelo de los modelos disponibles")
+            modelo = input("Elija un modelo: ")
+        # Damos a elegir una opción al usuario de los colores disponibles
+        colores_disponibles = ["blanco", "gris espacial", "plata", "verde medianoche", "rojo"]
+        print("Colores disponibles: ", colores_disponibles)
+        color = input("Elija un color: ")
+        # Si el color elegido no esta en la lista de colores disponibles, se le pedira que elija uno de los colores disponibles
+        while color not in colores_disponibles:
+            print("Elija un color de los colores disponibles")
+            color = input("Elija un color: ")
+        # Damos a elegir una opción al usuario de las capacidades de almacenamiento disponibles
+        almacenamiento_disponible = ["32GB", "64GB", "128GB"]
+        print("Capacidades de almacenamiento disponibles: ", almacenamiento_disponible)
+        almacenamiento = input("Elija una capacidad de almacenamiento: ")
+        # Si la capacidad de almacenamiento elegida no esta en la lista de capacidades de almacenamiento disponibles, se le pedira que elija una de las capacidades de almacenamiento disponibles
+        while almacenamiento not in almacenamiento_disponible:
+            print("Elija una capacidad de almacenamiento de las capacidades de almacenamiento disponibles")
+            almacenamiento = input("Elija una capacidad de almacenamiento: ")
+        # Damos a elegir una opción al usuario de si desea o no el seguro de compra
+        seguro_disponible = ["si", "no"]
+        print("Seguro de compra disponible: ", seguro_disponible)
+        seguro = input("Desea el seguro de compra: ")
+        # Si la respuesta no es si o no, se le pedira que elija una de las opciones disponibles
+        while seguro not in seguro_disponible:
+            print("Elija una de las opciones disponibles")
+            seguro = input("Desea el seguro de compra: ")
+        # Damos a elegir una opción al usuario de si desea o no rentar el celular
+        renta_disponible = ["si", "no"]
+        print("Renta disponible: ", renta_disponible)
+        renta = input("Desea rentar el celular: ")
+        # Si la respuesta no es si o no, se le pedira que elija una de las opciones disponibles
+        while renta not in renta_disponible:
+            print("Elija una de las opciones disponibles")
+            renta = input("Desea rentar el celular: ")
+        # Si el usuario desea rentar el celular, se le pedira que elija una de las opciones disponibles
+        if renta == "si":
+            renta_disponible = ["1 mes", "3 meses", "6 meses", "12 meses"]
+            print("Renta disponible: ", renta_disponible)
+            renta = input("Elija una opcion: ")
+            # Si la respuesta no es si o no, se le pedira que elija una de las opciones disponibles
+            while renta not in renta_disponible:
+                print("Elija una de las opciones disponibles")
+                renta = input("Elija una opcion: ")
+        # Si el usuario desea comprar el celular, se le pedira que elija una de las opciones disponibles
+        if renta == "no":
+            compra_disponible = ["1 mes", "3 meses", "6 meses", "12 meses"]
+            print("Compra disponible: ", compra_disponible)
+            compra = input("Elija una opcion: ")
+            # Si la respuesta no es si o no, se le pedira que elija una de las opciones disponibles
+            while compra not in compra_disponible:
+                print("Elija una de las opciones disponibles")
+                compra = input("Elija una opcion: ")
+        # Se le mostrara al usuario el total a pagar
+        print("El total a pagar es de: $", 1000)
+        # Se le preguntara al usuario si desea realizar la compra
+        compra_disponible = ["si", "no"]
+        print("Compra disponible: ", compra_disponible)
+        compra = input("Desea realizar la compra: ")
+        # Si la respuesta no es si o no, se le pedira que elija una de las opciones disponibles
+        while compra not in compra_disponible:
+            print("Elija una de las opciones disponibles")
+            compra = input("Desea realizar la compra: ")
+        # Si el usuario desea realizar la compra, se le mostrara un mensaje de compra exitosa
+        if compra == "si":
+            print("Compra exitosa")
+        # Si el usuario no desea realizar la compra, se le mostrara un mensaje de compra cancelada
+        if compra == "no":
+            print("Compra cancelada")
+
+    # Clase Ventan para implementar la interfaz grafica
+
+    
+
+    # Creamos el método en el que se implementará un interfaz gráfica para el usuario
+    #def apple_grafico():
+        
+
+
+
+
+
+# class Compra:
+#     almacenamiento = ["32GB", "64GB", "128GB"]
+#     def __init__(self, inventario = {"Apple":[
+#                 {"Iphone 11":
+#                     [{"color":
+#                         ["blanco", "gris espacial", "plata", "verde medianoche", "rojo"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"Iphone 12": [{"color":
+#                         ["blanco", "negro", "verde", "azul", "rojo"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"Iphone 13": [{"color":
+#                         ["blanco estelar", "rosa", "verde olivo", "azul medianoche", "rojo"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]}],
+#             "Samsung":[
+#                 {"S20":
+#                     [{"color":
+#                         ["blanco", "gris", "azul", "rojo", "verde"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"S21": [{"color":
+#                         ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"A51": [{"color":
+#                         ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]}],
+#             "Huawei":[
+#                 {"P40":
+#                     [{"color":
+#                         ["blanco", "naranja", "azul", "rojo", "verde"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"P50": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"P60": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]}],
+#             "Xiaomi":[
+#                 {"Redmi Note 9":
+#                     [{"color":
+#                         ["blanco", "gris", "azul", "rojo", "verde"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"Redmi Note 10": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"Redmi Note 11": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]}],
+#             "Motorola":[
+#                 {"G10":
+#                     [{"color":
+#                         ["blanco", "gris", "azul", "rojo", "verde"]}, 
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"G20": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]},
+#                 {"G30": [{"color":
+#                     ["blanco", "gris", "azul", "rojo", "verde"]},
+#                     {"almacenamiento": 
+#                         almacenamiento}]}]}, seguro = None, renta = None, compra = None):
+        
+#         self.inventario = inventario
+#         self.seguro = seguro
+#         self.renta = renta
+#         self.compra = compra
+
+
 
 #Entry point
 def main():
-    #Creamos un objeto de la clase Compra
-    compra = Compra()
-    #Mostramos el inventario de celulares
-    compra.mostrarInventario()
+    compra = Compra("e")
+    compra.apple()
 
 if __name__ == "__main__":
     main()
