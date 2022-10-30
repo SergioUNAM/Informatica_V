@@ -22,6 +22,7 @@ combobox = ttk.Combobox(app, textvariable=selected_month, state="readonly", valu
 # Definimos la posicion del CB
 combobox.pack(fill=tk.X, padx=50, pady=5)
 
+# Perro
 
 # bind the selected value changes
 def month_changed(event):
