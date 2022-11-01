@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
-from calendar import month_name
 
 app = tk.Tk()  # CREAMOS LA VENTANA
 
@@ -17,7 +16,6 @@ label.pack(fill=tk.X, padx=5, pady=5)
 # create a combobox
 selected_month = tk.StringVar()
 combobox = ttk.Combobox(app, textvariable=selected_month, state="readonly", values= ["adfdf", "dsjfiasf", "ofij8349fjvm"])
-
 
 # Definimos la posicion del CB
 combobox.pack(fill=tk.X, padx=50, pady=5)

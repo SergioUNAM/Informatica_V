@@ -1,3 +1,4 @@
+from tkinter import ttk
 import tkinter as tk
 
 # Definimos a la clase Celular con los siguientes parametros: marca, modelo, precio, color, almacenamiento, compraSeguro, renta, compra
@@ -12,50 +13,14 @@ class Compra:
         
     #definimos el metodo ventanan donde se implementará la estructura de la interfaz grafica
     def ventana(self):
-        #definimos la ventana
-        self.ventana = Tk()
-        self.ventana.title("Tienda de Celulares")
-        self.ventana.geometry("500x500")
-        self.ventana.resizable(0,0)
+        self.ventana = tk.Tk()
+        self.ventana.config(width = 300, height = 300)
+        self.ventana.title("Compra de Celulares")
+        self.combo = ttk.Combobox(self.ventana, values = Celular.marcas)
+        self.combo.place(x = 100, y = 100)
+        self.combo.bind("<<ComboboxSelected>>", self.seleccionar_marca)
+        self.ventana.mainloop()
         
-        #definimos el frame
-        self.frame = Frame(self.ventana, width=500, height=500)
-        self.frame.pack()
-        
-        #definimos el label
-        self.label = Label(self.frame, text="Bienvenido a la tienda de celulares", font=("Arial", 18))
-        self.label.place(x=100, y=20)
-        
-        #definimos el boton
-        self.boton = Button(self.frame, text="Comenzar", command=self.marca)
-        self.boton.place(x=200, y=100)
-        
-        #definimos el boton salir
-        self.boton_salir = Button(self.frame, text="Salir", command=self.ventana.destroy)
-        self.boton_salir.place(x=200, y=150)
-        
-        #definimos el boton para mostrar el carrito
-        self.boton_carrito = Button(self.frame, text="Carrito", command=self.carrito)
-        self.boton_carrito.place(x=200, y=200)
-        
-        #definimos el boton para mostrar el total a pagar
-        self.boton_total = Button(self.frame, text="Total a pagar", command=self.total)
-        self.boton_total.place(x=200, y=250)
-        
-        #definimos el boton para mostrar el total a pagar
-        self.boton_comprar = Button(self.frame, text="Comprar", command=self.comprar)
-        self.boton_comprar.place(x=200, y=300)
-        
-        #definimos el boton para mostrar el total a pagar
-        self.boton_rentar = Button(self.frame, text="Rentar", command=self.rentar)
-        self.boton_rentar.place(x=200, y=350)
-        
-        #definimos el boton para mostrar el total a pagar
-        self.boton_seguro = Button(self.frame, text="Seguro", command=self.seguro)
-        self.boton_seguro.place(x=200, y=400)
-        
-        #definimos el boton para mostrar el total a pagar
-        self.boton_celular =
 
     def apple(self):
         modelos_disponible = ["Iphone 11", "Iphone 12", "Iphone 13"]
