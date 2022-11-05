@@ -2,148 +2,89 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
-# Definimos una clase abstracta llamada VentaMovil con un metodo llamado revisarPromocion
-class VentaMovil:
-    def revisarPromocion(self):
-        pass
-
-# Creamos la clase Celular con los atributos marca, modelo, color, capacidad_alamacenamiento, precio
-class Celular:
-    def __init__(self, marca = None, modelo = None, color = None, capacidad_almacenamiento = None, precio = None, renta = None, seguro = None,):
+# Creamos la clase TelefonoCelular con los siguientes atrbutos privados: marca, modelo, color, capacidad de almacenamiento, precio, plan_renta, seguro, precio_total
+class TelefonoCelular:
+    def __init__(self, marca, modelo, color, capacidad_almacenamiento, precio, plan_renta, seguro):
         self.__marca = marca
         self.__modelo = modelo
         self.__color = color
         self.__capacidad_almacenamiento = capacidad_almacenamiento
         self.__precio = precio
-        self.__renta = renta
+        self.__plan_renta = plan_renta
         self.__seguro = seguro
-        
-    def get_marca(self):
+        self.__precio_total = precio + plan_renta + seguro
+
+   # GETTERS Y SETTERS
+
+   # marca
+    @property # getter atributo marca
+    def marca(self):
         return self.__marca
 
-    def get_modelo(self):
+    @marca.setter # setter atributo marca
+    def marca(self, value):
+        self.__marca = value
+
+    # modelo
+    @property # getter atributo modelo
+    def modelo(self):
         return self.__modelo
 
-    def get_color(self):
+    @modelo.setter # setter atributo modelo
+    def modelo(self, value):
+        self.__modelo = value
+
+    # color
+    @property # getter atributo color
+    def color(self):
         return self.__color
 
-    def get_capacidad_almacenamiento(self):
+    @color.setter # setter atributo color
+    def color(self, value):
+        self.__color = value
+
+    # capacidad_almacenamiento
+    @property # getter atributo capacidad_almacenamiento
+    def capacidad_almacenamiento(self):
         return self.__capacidad_almacenamiento
 
-    def get_precio(self):
+    @capacidad_almacenamiento.setter # setter atributo capacidad_almacenamiento
+    def capacidad_almacenamiento(self, value):
+        self.__capacidad_almacenamiento = value
+
+    # precio
+    @property # getter atributo precio
+    def precio(self):
         return self.__precio
+
+    @precio.setter # setter atributo precio
+    def precio(self, value):
+        self.__precio = value
+
+    # plan_renta
+    @property # getter atributo plan_renta
+    def plan_renta(self):
+        return self.__plan_renta
+
+    @plan_renta.setter # setter atributo plan_renta
+    def plan_renta(self, value):
+        self.__plan_renta = value
     
-    def get_renta(self):
-        return self.__renta
-    
-    def set_seguro(self, seguro):
-        self.__seguro = seguro
+    # seguro
+    @property # getter atributo seguro
+    def seguro(self):
+        return self.__seguro
 
-    def set_marca(self, marca):
-        self.__marca = marca
+    @seguro.setter # setter atributo seguro
+    def seguro(self, value):
+        self.__seguro = value
 
-    def set_modelo(self, modelo):
-        self.__modelo = modelo
+    # precio_total
+    @property # getter atributo precio_total
+    def precio_total(self):
+        return self.__precio_total
 
-    def set_color(self, color):
-        self.__color = color
+    @precio_total.setter # setter atributo precio_total
+    def precio_total(self, value):
+        self.__precio_total = value
 
-    def set_capacidad_almacenamiento(self, capacidad_almacenamiento):
-        self.__capacidad_almacenamiento = capacidad_almacenamiento
-
-    def set_precio(self, precio):
-        self.__precio = precio
-        
-    def set_renta(self, renta):
-        self.__renta = renta
-    
-    def set_seguro(self, seguro):
-        self.__seguro = seguro
-
-    # Creamos el método eleccion, en el cual se determinarán los atributos del celular
-    def eleccion(self):
-        self.set_marca(input("Ingrese la marca del celular: "))
-        self.set_modelo(input("Ingrese el modelo del celular: "))
-        self.set_color(input("Ingrese el color del celular: "))
-        self.set_capacidad_almacenamiento(input("Ingrese la capacidad de almacenamiento del celular: "))
-        self.set_precio(input("Ingrese el precio del celular: "))
-        self.set_renta(input("Ingrese la renta del celular: "))
-        self.set_seguro(input("Ingrese el seguro del celular: "))
-    
-    # Creamos el metodo mostrar eleccion, en el cual se mostrarán los atributos del celular
-    def mostrar_eleccion(self):
-        print("Marca: ", self.get_marca())
-        print("Modelo: ", self.get_modelo())
-        print("Color: ", self.get_color())
-        print("Capacidad de almacenamiento: ", self.get_capacidad_almacenamiento())
-        print("Precio: ", self.get_precio())
-
-
-# Creamos la clase Cliente con los siguientes atributos privados nombre, apellido_paterno, apellido_materno, correo_electronico, telefono
-class Cliente:
-    def __init__(self, nombre = None, apellido_paterno = None, apellido_materno = None, correo_electronico = None, telefono = None):
-        self.__nombre = nombre
-        self.__apellido_paterno = apellido_paterno
-        self.__apellido_materno = apellido_materno
-        self.__correo_electronico = correo_electronico
-        self.__telefono = telefono
-
-    def get_nombre(self):
-        return self.__nombre
-
-    def get_apellido_paterno(self):
-        return self.__apellido_paterno
-
-    def get_apellido_materno(self):
-        return self.__apellido_materno
-
-    def get_correo_electronico(self):
-        return self.__correo_electronico
-
-    def get_telefono(self):
-        return self.__telefono
-
-    def set_nombre(self, nombre):
-        self.__nombre = nombre
-
-    def set_apellido_paterno(self, apellido_paterno):
-        self.__apellido_paterno = apellido_paterno
-
-    def set_apellido_materno(self, apellido_materno):
-        self.__apellido_materno = apellido_materno
-
-    def set_correo_electronico(self, correo_electronico):
-        self.__correo_electronico = correo_electronico
-
-    def set_telefono(self, telefono):
-        self.__telefono = telefono
-
-    def __str__(self):
-        return f"Nombre: {self.__nombre}, Apellido Paterno: {self.__apellido_paterno}, Apellido Materno: {self.__apellido_materno}, Correo Electronico: {self.__correo_electronico}, Telefono: {self.__telefono}"
-
- # definimos una funcion para desplegar distintos combobox en una interfaz grafica
-def menu():
-    marcas = ["Apple", "Samsung", "Xiaomi", "Huawei", "Motorola"]
-    ventana = tk.Tk()
-    ventana.title("Menu")
-    ventana.geometry("400x400")
-    ventana.configure(background = "light blue")
-    ventana.resizable(0,0)
-
-    label = ttk.Label(text = "Bienvenido a la tienda de celulares", background = "light blue")
-    label.pack(fill=tk.X, expand=True)
-
-    #Creamos el combobox
-    combo = ttk.Combobox(ventana, values = marcas)
-    combo.pack(fill=tk.X, expand=True)
-
-    ventana.mainloop()
-
-
-def main():
-    # Creamos un objeto de la clase Celular
-    celular = Celular()
-    menu()
-
-if __name__ == "__main__":
-    main()
