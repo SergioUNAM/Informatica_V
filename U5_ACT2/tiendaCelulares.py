@@ -1,10 +1,12 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from tkinter.messagebox import showinfo
+from turtle import title
 
 # Creamos la clase TelefonoCelular con los siguientes atrbutos privados: marca, modelo, color, capacidad de almacenamiento, precio, plan_renta, seguro, precio_total
 class TelefonoCelular:
-    def __init__(self, marca, modelo, color, capacidad_almacenamiento, precio, plan_renta, seguro):
+    
+    def __init__(self, marca=None , modelo= None, color= None, capacidad_almacenamiento= None, precio= 100, plan_renta= 100, seguro= 100):
         self.__marca = marca
         self.__modelo = modelo
         self.__color = color
@@ -12,7 +14,6 @@ class TelefonoCelular:
         self.__precio = precio
         self.__plan_renta = plan_renta
         self.__seguro = seguro
-        self.__precio_total = precio + plan_renta + seguro
 
    # GETTERS Y SETTERS
 
@@ -88,3 +89,43 @@ class TelefonoCelular:
     def precio_total(self, value):
         self.__precio_total = value
 
+    # Definimos el método __str__ para imprimir los atributos de la clase TelefonoCelular
+    def __str__(self):
+        return f"Marca: {self.__marca}, Modelo: {self.__modelo}, Color: {self.__color}, Capacidad de almacenamiento: {self.__capacidad_almacenamiento}, Precio: {self.__precio}, Plan de renta: {self.__plan_renta}, Seguro: {self.__seguro}, Precio total: {self.__precio_total}"
+
+
+def interfaz1(telefono, lista_marca):
+    ventana = tk.Tk()
+    ventana.geometry('500x500')
+    ventana.resizable(False, False)
+    ventana.title('Tienda de Celulares')
+    
+    # Creamos un titulo con formato atractivo
+    etiqueta = tk.Label(ventana, text = 'Tienda de Celulares', font = ('Arial', 20, 'bold'))
+    etiqueta.pack(fill=tk.X, padx=5, pady=5)
+    
+
+    def seleccion(event):
+        seleccion = combo.get()
+        telefono.marca = seleccion
+        
+    # combobox marca
+    combo = ttk.Combobox(ventana, values = lista_marca, state = 'readonly')
+    combo.pack(fill=tk.X, padx=5, pady=5)
+    combo.bind('<<ComboboxSelected>>', seleccion, telefono)
+    ventana.mainloop()
+
+# Método principal del programa
+def main():
+    marcas = ['Apple', 'Samsung', 'Huawei', 'Xiaomi', 'LG', 'Motorola', 'Sony', 'Nokia', 'Alcatel', 'Blackberry']
+
+    # Creamos un objeto de la clase TelefonoCelular
+    telefono = TelefonoCelular()
+
+    interfaz1(telefono, marcas)
+
+    print(telefono.marca)
+
+# Entry point del programa
+if __name__ == "__main__":
+    main()
