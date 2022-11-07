@@ -93,37 +93,70 @@ class TelefonoCelular:
     def __str__(self):
         return f"Marca: {self.__marca}, Modelo: {self.__modelo}, Color: {self.__color}, Capacidad de almacenamiento: {self.__capacidad_almacenamiento}, Precio: {self.__precio}, Plan de renta: {self.__plan_renta}, Seguro: {self.__seguro}, Precio total: {self.__precio_total}"
 
-
-def interfaz1(telefono, lista_marca):
-    ventana = tk.Tk()
-    ventana.geometry('500x500')
-    ventana.resizable(False, False)
-    ventana.title('Tienda de Celulares')
+# Creamos la función Interfaz1
+def Interfaz1(telefono, lista_marcas):
+    # Creamos la ventana
+    def ventana():
+        ventana = tk.Tk()
+        ventana.geometry('500x500')
+        ventana.resizable(False, False)
+        ventana.title('Tienda de Celulares')
     
-    # Creamos un titulo con formato atractivo
-    etiqueta = tk.Label(ventana, text = 'Tienda de Celulares', font = ('Arial', 20, 'bold'))
-    etiqueta.pack(fill=tk.X, padx=5, pady=5)
+        # Creamos un titulo con formato atractivo
+        etiqueta = tk.Label(ventana, text = 'Tienda de Celulares', font = ('Arial', 20, 'bold'))
+        etiqueta.pack(fill=tk.X, padx=5, pady=5)
     
 
-    def seleccion(event):
-        seleccion = combo.get()
-        telefono.marca = seleccion
+        # Invocamos a la función comboMarca
+        comboMarca(ventana, lista_marcas)
+
+        # Creamos un boton para cerrar la ventana
+        boton = tk.Button(ventana, text = 'Cerrar', command = ventana.destroy)
+        boton.pack(fill=tk.X, padx=5, pady=5)
+
+        ventana.mainloop()
         
-    # combobox marca
-    combo = ttk.Combobox(ventana, values = lista_marca, state = 'readonly')
-    combo.pack(fill=tk.X, padx=5, pady=5)
-    combo.bind('<<ComboboxSelected>>', seleccion, telefono)
-    ventana.mainloop()
+    # Combobox Marca
+    def comboMarca(ventana, lista_marcas):
+        # Creamos la función que asignara el valor de la marca al objeto telefono
+        def seleccionMarca(event):
+            seleccion = comboMarca.get()
+            telefono.marca = seleccion
+        
+        # combobox marca
+        comboMarca = ttk.Combobox(ventana, values = lista_marcas, state = 'readonly')
+        comboMarca.pack(fill=tk.X, padx=5, pady=5)
+        comboMarca.bind('<<ComboboxSelected>>', seleccionMarca, telefono)
 
+    
+
+    # Ejecutamos la función ventana
+    ventana()
+    
+    
 # Método principal del programa
 def main():
-    marcas = ['Apple', 'Samsung', 'Huawei', 'Xiaomi', 'LG', 'Motorola', 'Sony', 'Nokia', 'Alcatel', 'Blackberry']
+    marcas = ['Apple', 'Samsung', 'Huawei', 'Xiaomi', 'LG']
 
     # Creamos un objeto de la clase TelefonoCelular
     telefono = TelefonoCelular()
 
-    interfaz1(telefono, marcas)
+    Interfaz1(telefono, marcas)
 
+    
+    # Creamos una lista de 5 modelos por cada una de las marcas para pasarlaas como parametro a la función interfaz1
+    if telefono.marca == 'Apple':
+        modelos = ["Iphone X", "Iphone 11", "Iphone 12", "Iphone 12 mini", "Iphone 13"]
+    elif telefono.marca == 'Samsung':
+        modelos = ["Galaxy S21", "Galaxy S21+", "Galaxy S21 Ultra", "Galaxy S20", "Galaxy S20+"]
+    elif telefono.marca == 'Huawei':
+        modelos = ["P40", "P40 Pro", "P40 Pro+", "P30", "P30 Pro"]
+    elif telefono.marca == 'Xiaomi':
+        modelos = ["Mi 10", "Mi 10 Pro", "Mi 10T", "Mi 10T Pro", "Mi 11"]
+    elif telefono.marca == 'LG':
+        modelos = ["G8X ThinQ", "V60 ThinQ", "K92", "K52", "K42"]
+
+    
     print(telefono.marca)
 
 # Entry point del programa
