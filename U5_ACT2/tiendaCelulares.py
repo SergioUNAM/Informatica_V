@@ -109,12 +109,9 @@ def Interfaz1(telefono):
         etiqueta = tk.Label(ventana, text='Tienda de Celulares', font=('Arial', 20, 'bold'))
         etiqueta.pack(fill=tk.X, padx=5, pady=5)
 
-        
-
         # Ejecutamos los combos solicitados
         comboMarca(ventana)
         comboModelo(ventana)
-
 
         # Creamos un boton para cerrar la ventana
         boton = tk.Button(ventana, text='Cerrar', command=ventana.destroy)
@@ -130,7 +127,7 @@ def Interfaz1(telefono):
         # Creamos la función que asignara el valor de la marca al objeto telefono
         def seleccionMarca(event):
             telefono.marca = comboMarca.get()
-            
+
         # combobox marca
         comboMarca = ttk.Combobox(ventana, values=lista_marcas, state='readonly')
         comboMarca.pack(fill=tk.X, padx=5, pady=5)
@@ -144,13 +141,11 @@ def Interfaz1(telefono):
         # Creamos la función que asignara el valor del modelo al objeto telefono
         def seleccionModelo(event):
             telefono.modelo = comboModelo.get()
-            
+
         # combobox modelo
         comboModelo = ttk.Combobox(ventana, values=lista_modelos, state='readonly')
         comboModelo.pack(fill=tk.X, padx=5, pady=5)
         comboModelo.bind('<<ComboboxSelected>>', seleccionModelo, telefono)
-    
-    
 
     # Ejecutamos la función ventana
     ventana()
