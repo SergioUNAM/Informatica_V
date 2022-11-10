@@ -5,8 +5,7 @@ from tkinter import ttk
 # Creamos la clase TelefonoCelular con los siguientes atrbutos privados: marca, modelo, color, capacidad de almacenamiento, precio, plan_renta, seguro, precio_total
 class TelefonoCelular:
 
-    def __init__(self, marca=None, modelo=None, color=None, capacidad_almacenamiento=None, precio=100, plan_renta=100,
-                 seguro=100):
+    def __init__(self, marca=None, modelo=None, color=None, capacidad_almacenamiento=None, precio=0, plan_renta=0, seguro=0, precio_total=0):
         self.__marca = marca
         self.__modelo = modelo
         self.__color = color
@@ -14,6 +13,7 @@ class TelefonoCelular:
         self.__precio = precio
         self.__plan_renta = plan_renta
         self.__seguro = seguro
+        self.__precio_total = precio_total
 
     # GETTERS Y SETTERS
 
@@ -93,8 +93,11 @@ class TelefonoCelular:
     def __str__(self):
         return f"Marca: {self.__marca}, Modelo: {self.__modelo}, Color: {self.__color}, Capacidad de almacenamiento: {self.__capacidad_almacenamiento}, Precio: {self.__precio}, Plan de renta: {self.__plan_renta}, Seguro: {self.__seguro}, Precio total: {self.__precio_total}"
 
-
 class App(tk.Frame):
+
+    # Creamos un objeto de la clase TelefonoCelular
+    telefono = TelefonoCelular()
+
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
@@ -115,17 +118,22 @@ class App(tk.Frame):
 
         # Check box solicitados
         # Checkbox si adquiere un plan de renta
-        self.checkbox_value = tk.BooleanVar(self)
+        self.checkbox_plan_renta = tk.BooleanVar(self)
         self.checkbox = ttk.Checkbutton(self,
-                                        text="Opción",
-                                        variable=self.checkbox_value,
-                                        command=self.checkbox_clicked)
+                                        text="Desea adquirir un plan de renta",
+                                        variable=self.checkbox_plan_renta,
+                                        command=self.checkbox_clicked_plan_renta)
         self.checkbox.grid(row=4, column=0)
-
         self.place(width=300, height=200)
 
-    def checkbox_clicked(self):
-        print(self.checkbox_value.get())
+        # Checkbox si adquiere un seguro
+        self.checkbox_seguro = tk.BooleanVar(self)
+        self.checkbox = ttk.Checkbutton(self,
+                                        text="Desea adquirir un seguro",
+                                        variable=self.checkbox_seguro,
+                                        command=self.checkbox_clicked_seguro)
+        self.checkbox.grid(row=5, column=0)
+        self.place(width=300, height=200)
 
     def comboModelo_update(self, event):
         now = self.comboModelo.get()
@@ -166,6 +174,12 @@ class App(tk.Frame):
             self.comboColor.config(values=values)
 
 
+    def checkbox_clicked_plan_renta(self):
+        print(self.checkbox_plan_renta.get())
+
+    def checkbox_clicked_seguro(self):
+        print(self.checkbox_seguro.get())
+
 # Método principal del programa
 def main():
     root = tk.Tk()
@@ -180,9 +194,6 @@ def main():
 
     App(root).pack(expand=True, fill=tk.BOTH)
     root.mainloop()
-
-    # Creamos un objeto de la clase TelefonoCelular
-    telefono = TelefonoCelular()
 
 
 # Entry point del programa
