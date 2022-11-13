@@ -1,3 +1,4 @@
+# Importación de librerías
 import tkinter as tk
 from tkinter import ttk
 
@@ -94,7 +95,7 @@ class TelefonoCelular:
     def __str__(self):
         return f"Marca: {self.__marca}, Modelo: {self.__modelo}, Color: {self.__color}, Capacidad de almacenamiento: {self.__capacidad_almacenamiento}, Precio: {self.__precio}, Plan de renta: {self.__plan_renta}, Seguro: {self.__seguro}, Precio total: {self.__precio_total}"
 
-
+# Clase App que despliega la primera interfaz solicitada
 class App(tk.Frame):
 
     # Creamos un objeto de la clase TelefonoCelular
@@ -149,11 +150,11 @@ class App(tk.Frame):
 
         # Checkbox si adquiere un seguro
         self.checkbox_seguro = tk.BooleanVar(self)
-        self.checkbox2 = ttk.Checkbutton(self,
+        self.checkbox = ttk.Checkbutton(self,
                                         text="Desea adquirir un seguro",
                                         variable=self.checkbox_seguro,
                                         command=self.checkbox_clicked_seguro)
-        self.checkbox2.grid(row=8, column=0)
+        self.checkbox.grid(row=8, column=0)
         self.place(width=300, height=200)
 
     def precio_update(self, event):
@@ -342,6 +343,8 @@ class App(tk.Frame):
         self.telefono.modelo = self.comboModelo.get()
         self.telefono.precio = precio
         self.telefono.capacidad_almacenamiento = self.comboAlmacenamiento.get()
+        self.telefono.color = self.comboColor.get()
+
         
 
         # Mostramos el precio en la interfaz
@@ -388,15 +391,22 @@ class App(tk.Frame):
 
     def checkbox_clicked_plan_renta(self):
         if self.checkbox_plan_renta.get():
-            self.label_plan_renta.config(text="\nPlan de renta seleccionado\n El precio del equipo será dividido en 12 meses.\nAl terminar el plazo el equipo será tuyo")
+            self.telefono.plan_renta = True
+            self.label_plan_renta.config(text=f"\nPlan de renta seleccionado\n El precio del equipo será dividido en 12 mensualidades. \nEl precio ${self.telefono.precio} mxn dividido entre 12 rentas da un total de {round(float(self.telefono.precio / 12), 2)} mxn \nAl terminar el plazo el equipo podra ser tuyo. \nConsulta términos y condiciones en la tienda.")
         else:
-            self.label_plan_renta.config(text="No elegiste el plan de renta")
+            self.telefono.plan_renta = False
+            self.label_plan_renta.config(text="\nNo elegiste el plan de renta, el precio del equipo será el total")
 
     def checkbox_clicked_seguro(self):
         if self.checkbox_seguro.get():
-            self.label_seguro.config(text="Elegiste el seguro")
+            self.telefono.seguro = 750
+            self.telefono.precio_total = self.telefono.precio + self.telefono.seguro
+            self.label_seguro.config(text=f"\nElegiste el seguro con un costo adicional de $750.00 mxn. \nEl precio total del equipo + seguro es de ${self.telefono.precio} mxn + ${self.telefono.seguro} mxn = ${self.telefono.precio_total} mxn\nConsulta términos y condiciones")
         else:
-            self.label_seguro.config(text="No elegiste el seguro")
+            self.telefono.seguro = 0
+            self.telefono.precio_total = self.telefono.precio + self.telefono.seguro
+            self.label_seguro.config(text=f"\nElegiste no contratar el seguro, \ntoma en cuenta que en caso de robo o extravío u algún otro incidente \nno podrás reclamar el equipo.\nEl precio total del equipo + seguro es de ${self.telefono.precio} mxn + ${self.telefono.seguro} mxn = ${self.telefono.precio_total} mxn\nConsulta términos y condiciones")
+        print(self.telefono)
 
 
 # Método principal del programa
