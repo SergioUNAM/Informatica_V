@@ -160,6 +160,7 @@ class App(tk.Frame):
         super().__init__(parent, *args, **kwargs)
 
         # Inicializamos los atributos de la clase TelefonoCelular
+        self.precio = None
         self.telefono = TelefonoCelular()
 
         # Combos solicitados
