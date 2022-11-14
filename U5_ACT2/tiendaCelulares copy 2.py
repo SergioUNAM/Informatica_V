@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 # Creamos la clase Cliente con los siguientes atributos privados nombre, apellido paterno y apellido materno, correo electrónico y teléfono.
 class Cliente:
     def __init__(self, nombre=None, apellidoPaterno=None, apellidoMaterno=None, correoElectronico=None, telefono=None):
@@ -12,7 +13,7 @@ class Cliente:
         self.__telefono = telefono
 
     # GETTERS Y SETTERS
-    
+
     # nombre
     @property  # getter atributo nombre
     def nombre(self):
@@ -58,7 +59,6 @@ class Cliente:
     def telefono(self, telefono):
         self.__telefono = telefono
 
-    
 
 # Creamos la clase TelefonoCelular con los siguientes atrbutos privados: marca, modelo, color, capacidad de almacenamiento, precio, plan_renta, seguro, precio_total
 class TelefonoCelular:
@@ -166,7 +166,8 @@ class App(tk.Frame):
         # Marca
         self.label_marca = tk.Label(self, text="Marca")
         self.label_marca.grid(row=0, column=0, padx=5, pady=5)
-        self.comboMarca = ttk.Combobox(self, values=["Apple", "Samsung", "Huawei", "Xiaomi", "Motorola"], state='readonly')
+        self.comboMarca = ttk.Combobox(self, values=["Apple", "Samsung", "Huawei", "Xiaomi", "Motorola"],
+                                       state='readonly')
         self.comboMarca.grid(row=1, column=0)
 
         # Modelo
@@ -186,15 +187,14 @@ class App(tk.Frame):
         self.label_capacidad_almacenamiento.grid(row=6, column=0, padx=5, pady=5)
         self.comboAlmacenamiento = ttk.Combobox(self, values=["32 gb", "64 gb", "128 gb"], state='readonly')
         self.comboAlmacenamiento.grid(row=7, column=0)
-        
-       
+
         # Manejo de eventos
         self.comboMarca.bind("<<ComboboxSelected>>", self.comboModelo_update)
         self.comboModelo.bind("<<ComboboxSelected>>", self.comboColor_update)
         self.comboAlmacenamiento.bind("<<ComboboxSelected>>", self.precio_update)
         self.espacio = tk.Label(self, text="")
         self.espacio.grid(row=8, column=0, padx=5, pady=5)
-        
+
         # Creamos un label vacio donde se mostrará el precio
         self.label_precio = tk.Label(self, text="")
         self.label_precio.grid(row=13, column=0)
@@ -241,7 +241,7 @@ class App(tk.Frame):
 
         # Creamos un titulo con formato
         root.title("Unidad 5, Actividad 2")
-        label = tk.Label(root, text="Tienda de Celulares FCA", font=("Arial", 25))
+        label = tk.Label(root, text="Tienda de Celulares FCAa", font=("Arial", 25))
         label.grid(row=0, column=0, columnspan=2, pady=10)
         label.pack(fill=tk.X, padx=5, pady=5)
 
@@ -250,7 +250,7 @@ class App(tk.Frame):
         label2.pack(fill=tk.X, padx=5, pady=5)
 
         Interfaz2(root).pack(expand=True, fill=tk.BOTH)
-        
+
         root.mainloop()
 
     def precio_update(self, event):
@@ -261,183 +261,183 @@ class App(tk.Frame):
         # Modelos Motorola ["Moto G9", "Moto G8", "Moto G7", "Moto G6", "Moto G5"]
         if (combo_sel := self.comboModelo.get()) == "iPhone 12":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 14999
+                self.precio = 14999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 16499
+                self.precio = 16499
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 19, 499
+                self.precio = 19, 499
         elif (combo_sel := self.comboModelo.get()) == "iPhone 11":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 10900
+                self.precio = 10900
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 11900
+                self.precio = 11900
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 12900
+                self.precio = 12900
         elif (combo_sel := self.comboModelo.get()) == "iPhone X":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 7999
+                self.precio = 7999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 8999
+                self.precio = 8999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 9999
+                self.precio = 9999
         elif (combo_sel := self.comboModelo.get()) == "iPhone XR":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 9499
+                self.precio = 9499
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 10499
+                self.precio = 10499
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 11499
+                self.precio = 11499
         elif (combo_sel := self.comboModelo.get()) == "iPhone 8":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 5999
+                self.precio = 5999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 6999
+                self.precio = 6999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 7999
+                self.precio = 7999
         elif (combo_sel := self.comboModelo.get()) == "Galaxy S21":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 14999
+                self.precio = 14999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 15999
+                self.precio = 15999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 16999
+                self.precio = 16999
         elif (combo_sel := self.comboModelo.get()) == "Galaxy S20":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 12999
+                self.precio = 12999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 13999
+                self.precio = 13999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 14999
+                self.precio = 14999
         elif (combo_sel := self.comboModelo.get()) == "Galaxy S10":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 9999
+                self.precio = 9999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 10999
+                self.precio = 10999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 11999
+                self.precio = 11999
         elif (combo_sel := self.comboModelo.get()) == "Galaxy S9":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 7999
+                self.precio = 7999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 8999
+                self.precio = 8999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 9999
+                self.precio = 9999
         elif (combo_sel := self.comboModelo.get()) == "Galaxy S8":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 5999
+                self.precio = 5999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 6999
+                self.precio = 6999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 7999
+                self.precio = 7999
         elif (combo_sel := self.comboModelo.get()) == "P40":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 14999
+                self.precio = 14999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 15999
+                self.precio = 15999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 16999
+                self.precio = 16999
         elif (combo_sel := self.comboModelo.get()) == "P30":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 12999
+                self.precio = 12999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 13999
+                self.precio = 13999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 14999
+                self.precio = 14999
         elif (combo_sel := self.comboModelo.get()) == "P20":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 9999
+                self.precio = 9999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 10999
+                self.precio = 10999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 11999
+                self.precio = 11999
         elif (combo_sel := self.comboModelo.get()) == "P10":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 7999
+                self.precio = 7999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 8999
+                self.precio = 8999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 9999
+                self.precio = 9999
         elif (combo_sel := self.comboModelo.get()) == "P9":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 5999
+                self.precio = 5999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 6999
+                self.precio = 6999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 7999
+                self.precio = 7999
         elif (combo_sel := self.comboModelo.get()) == "Mi 10":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 14999
+                self.precio = 14999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 15999
+                self.precio = 15999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 16999
+                self.precio = 16999
         elif (combo_sel := self.comboModelo.get()) == "Mi 9":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 12999
+                self.precio = 12999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 13999
+                self.precio = 13999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 14999
+                self.precio = 14999
         elif (combo_sel := self.comboModelo.get()) == "Mi 8":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 9999
+                self.precio = 9999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 10999
+                self.precio = 10999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 11999
+                self.precio = 11999
         elif (combo_sel := self.comboModelo.get()) == "Mi 7":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 7999
+                self.precio = 7999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 8999
+                self.precio = 8999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 9999
+                self.precio = 9999
         elif (combo_sel := self.comboModelo.get()) == "Mi 6":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 5999
+                self.precio = 5999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 6999
+                self.precio = 6999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 7999
+                self.precio = 7999
         elif (combo_sel := self.comboModelo.get()) == "Moto G9":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 14999
+                self.precio = 14999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 15999
+                self.precio = 15999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 16999
+                self.precio = 16999
         elif (combo_sel := self.comboModelo.get()) == "Moto G8":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 12999
+                self.precio = 12999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 13999
+                self.precio = 13999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 14999
+                self.precio = 14999
         elif (combo_sel := self.comboModelo.get()) == "Moto G7":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 9999
+                self.precio = 9999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 10999
+                self.precio = 10999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 11999
+                self.precio = 11999
         elif (combo_sel := self.comboModelo.get()) == "Moto G6":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 7999
+                self.precio = 7999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 8999
+                self.precio = 8999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 9999
+                self.precio = 9999
         elif (combo_sel := self.comboModelo.get()) == "Moto G5":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
-                precio = 5999
+                self.precio = 5999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
-                precio = 6999
+                self.precio = 6999
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                precio = 7999
-        
+                self.precio = 7999
+
         self.telefono.marca = self.comboMarca.get()
         self.telefono.modelo = self.comboModelo.get()
-        self.telefono.precio = precio
+        self.telefono.precio = self.precio
         self.telefono.capacidad_almacenamiento = self.comboAlmacenamiento.get()
         self.telefono.color = self.comboColor.get()
 
@@ -507,12 +507,22 @@ class App(tk.Frame):
 
 
 # Clase Interfaz2 que genera la segunda ventana solicitada
-class Interfaz2:
-    pass
+class Interfaz2(tk.Frame):
+
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
+
+        # Inicializamos los atributos de la clase Cliente
+        self.cliente = Cliente()
+
+        # Creamos los widgets de la interfaz
+        self.label_nombre = tk.Label(self, text="Nombre")
+        self.label_nombre.grid(row=0, column=0, padx=5, pady=5)
+        self.label_nombre.pack(fill=tk.X, padx=5, pady=5)
+
 
 # Método principal del programa
 def main():
-
     root = tk.Tk()
     root.geometry("525x625")
     root.resizable(False, False)
