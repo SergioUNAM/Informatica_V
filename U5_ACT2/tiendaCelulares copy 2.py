@@ -236,19 +236,16 @@ class App(tk.Frame):
 
     # Metodo comprar donde se desplegara la segunda interfaz gráfica
     def comprar(self):
+        
         root = tk.Tk()
-        root.geometry("525x625")
+        root.geometry("725x725")
         root.resizable(False, False)
 
         # Creamos un titulo con formato
         root.title("Unidad 5, Actividad 2")
-        label = tk.Label(root, text="Tienda de Celulares FCAa", font=("Arial", 25))
+        label = tk.Label(root, text="Tienda de Celulares FCA", font=("Arial", 25))
         label.grid(row=0, column=0, columnspan=2, pady=10)
         label.pack(fill=tk.X, padx=5, pady=5)
-
-        label2 = tk.Label(root, text="Datos personales y facturación", font=("Arial", 20))
-        label2.grid(row=1, column=0, columnspan=2, pady=10)
-        label2.pack(fill=tk.X, padx=5, pady=5)
 
         Interfaz2(root).pack(expand=True, fill=tk.BOTH)
 
@@ -517,10 +514,73 @@ class Interfaz2(tk.Frame):
         self.cliente = Cliente()
 
         # Creamos los widgets de la interfaz
-        self.label_nombre = tk.Label(self, text="Nombre")
-        self.label_nombre.grid(row=0, column=0, padx=5, pady=5)
-        self.label_nombre.pack(fill=tk.X, padx=5, pady=5)
 
+        # Subtitulo
+        self.subtitulo = tk.Label(self, text="Datos del cliente y facturación", font=("Arial", 20))
+        self.subtitulo.grid(row=0, column=0, columnspan=2, pady=10)
+
+        # Nombre
+        self.label_nombre = tk.Label(self, text="Nombre")
+        self.label_nombre.grid(row=1, column=0, padx=5, pady=5)
+        self.entry_nombre = tk.Entry(self)
+        self.entry_nombre.grid(row=1, column=1, padx=5, pady=5)
+
+        # Apellido Paterno
+        self.label_apellido_paterno = tk.Label(self, text="Apellido Paterno")
+        self.label_apellido_paterno.grid(row=2, column=0, padx=5, pady=5)
+        self.entry_apellido_paterno = tk.Entry(self)
+        self.entry_apellido_paterno.grid(row=2, column=1, padx=5, pady=5)
+
+        # Apellido Materno
+        self.label_apellido_materno = tk.Label(self, text="Apellido Materno")
+        self.label_apellido_materno.grid(row=3, column=0, padx=5, pady=5)
+        self.entry_apellido_materno = tk.Entry(self)
+        self.entry_apellido_materno.grid(row=3, column=1, padx=5, pady=5)
+
+        # CorreoElectronico
+        self.label_correo_electronico = tk.Label(self, text="Correo Electrónico")
+        self.label_correo_electronico.grid(row=4, column=0, padx=5, pady=5)
+        self.entry_correo_electronico = tk.Entry(self)
+        self.entry_correo_electronico.grid(row=4, column=1, padx=5, pady=5)
+
+        # Telefono
+        self.label_telefono = tk.Label(self, text="Teléfono")
+        self.label_telefono.grid(row=5, column=0, padx=5, pady=5)
+        self.entry_telefono = tk.Entry(self)
+        self.entry_telefono.grid(row=5, column=1, padx=5, pady=5)
+
+        
+        # Creamos los combobox de los datos bancarios
+
+        # bancos
+        self.label_banco = tk.Label(self, text="Banco")
+        self.label_banco.grid(row=6, column=0, padx=5, pady=5)
+        self.comboBanco = ttk.Combobox(self, state="readonly", values=["BBVA", "Banorte", "HSBC"])
+        self.comboBanco.grid(row=6, column=1, padx=5, pady=5)
+
+        # número de tarjeta con un ancho de 16 dígitos
+        self.label_numero_tarjeta = tk.Label(self, text="Número de tarjeta")
+        self.label_numero_tarjeta.grid(row=13, column=0, padx=5, pady=5)
+        self.entry_numero_tarjeta = tk.Entry(self)
+        self.entry_numero_tarjeta.grid(row=13, column=1, padx=5, pady=5)
+
+        # Campo de texto digito verificador y fecha de vencimiento en el mismo renglon
+        self.label_digito_verificador = tk.Label(self, text="Digito verificador")
+        self.label_digito_verificador.grid(row=15, column=0, padx=5, pady=5)
+        self.entry_digito_verificador = tk.Entry(self)
+        self.entry_digito_verificador.grid(row=15, column=1, padx=5, pady=5)
+        self.label_fecha_vencimiento = tk.Label(self, text="Fecha de vencimiento", justify="center")
+        self.label_fecha_vencimiento.grid(row=16, column=0, padx=10, pady=5)
+        self.entry_fecha_vencimiento_mes = tk.Entry(self, width=7)
+        self.entry_fecha_vencimiento_mes.grid(row=17, column=0, padx=5, pady=5)
+        self.entry_fecha_vencimiento_año = tk.Entry(self, width=7)
+        self.entry_fecha_vencimiento_año.grid(row=17, column=1, padx=5, pady=5)
+
+
+
+
+        # Centramos los widgets
+        self.grid_columnconfigure(0, weight=2)
 
 # Método principal del programa
 def main():
