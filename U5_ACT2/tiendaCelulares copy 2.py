@@ -1,7 +1,16 @@
 # Importación de librerías
+import random
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
+from tkinter.messagebox import *
 
+
+# Creamos una clase abstracta llamada VentaMovil con un método llamado revisarPromocion
+class VentaMovil:
+    def revisarPromocion(self, precio_venta):
+        if precio_venta > 10000:
+            return True
 
 # Creamos la clase Cliente con los siguientes atributos privados nombre, apellido paterno y apellido materno, correo electrónico y teléfono.
 class Cliente:
@@ -193,6 +202,8 @@ class App(tk.Frame):
         self.comboMarca.bind("<<ComboboxSelected>>", self.comboModelo_update)
         self.comboModelo.bind("<<ComboboxSelected>>", self.comboColor_update)
         self.comboAlmacenamiento.bind("<<ComboboxSelected>>", self.precio_update)
+
+        # Agregamos un espacio
         self.espacio = tk.Label(self, text="")
         self.espacio.grid(row=8, column=0, padx=5, pady=5)
 
@@ -236,7 +247,7 @@ class App(tk.Frame):
 
     # Metodo comprar donde se desplegara la segunda interfaz gráfica
     def comprar(self):
-        
+
         root = tk.Tk()
         root.geometry("725x725")
         root.resizable(False, False)
@@ -247,7 +258,9 @@ class App(tk.Frame):
         label.grid(row=0, column=0, columnspan=2, pady=10)
         label.pack(fill=tk.X, padx=5, pady=5)
 
-        Interfaz2(root).pack(expand=True, fill=tk.BOTH)
+        Interfaz2(root, self.telefono.marca, self.telefono.modelo, self.telefono.color, self.telefono.capacidad_almacenamiento, self.telefono.precio, self.telefono.plan_renta, self.telefono.seguro, self.telefono.precio_total).pack(expand=True, fill=tk.BOTH)
+
+        print("Total a pagar")
 
         root.mainloop()
 
@@ -505,10 +518,14 @@ class App(tk.Frame):
 
 
 # Clase Interfaz2 que genera la segunda ventana solicitada
-class Interfaz2(tk.Frame):
+class Interfaz2(tk.Frame, TelefonoCelular):
 
-    def __init__(self, parent, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
+    # Creamos el constructor de la clase
+    def __init__(self, parent, marca, modelo, color, capacidad_almacenamiento, precio, plan_renta, seguro, precio_total):
+        #super().__init__(parent, marca, modelo, color, capacidad_almacenamiento, precio, plan_renta, seguro, precio_total)
+        super().__init__(parent)
+        self.telefono = TelefonoCelular(marca, modelo, color, capacidad_almacenamiento, precio, plan_renta, seguro, precio_total)
+
 
         # Inicializamos los atributos de la clase Cliente
         self.cliente = Cliente()
@@ -549,7 +566,6 @@ class Interfaz2(tk.Frame):
         self.entry_telefono = tk.Entry(self)
         self.entry_telefono.grid(row=5, column=1, padx=5, pady=5)
 
-        
         # Creamos los combobox de los datos bancarios
 
         # bancos
@@ -564,23 +580,73 @@ class Interfaz2(tk.Frame):
         self.entry_numero_tarjeta = tk.Entry(self)
         self.entry_numero_tarjeta.grid(row=13, column=1, padx=5, pady=5)
 
-        # Campo de texto digito verificador y fecha de vencimiento en el mismo renglon
+        # Campo de texto digito verificador 
         self.label_digito_verificador = tk.Label(self, text="Digito verificador")
         self.label_digito_verificador.grid(row=15, column=0, padx=5, pady=5)
         self.entry_digito_verificador = tk.Entry(self)
         self.entry_digito_verificador.grid(row=15, column=1, padx=5, pady=5)
-        self.label_fecha_vencimiento = tk.Label(self, text="Fecha de vencimiento", justify="center")
-        self.label_fecha_vencimiento.grid(row=16, column=0, padx=10, pady=5)
-        self.entry_fecha_vencimiento_mes = tk.Entry(self, width=7)
-        self.entry_fecha_vencimiento_mes.grid(row=17, column=0, padx=5, pady=5)
-        self.entry_fecha_vencimiento_año = tk.Entry(self, width=7)
-        self.entry_fecha_vencimiento_año.grid(row=17, column=1, padx=5, pady=5)
+        
+        # Combobox para el mes de vencimiento
+        self.label_mes_vencimiento = tk.Label(self, text="Mes de vencimiento")
+        self.label_mes_vencimiento.grid(row=16, column=0, padx=5, pady=5)
+        self.comboMesVencimiento = ttk.Combobox(self, state="readonly", values=["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"])
+        self.comboMesVencimiento.grid(row=16, column=1, padx=5, pady=5)
 
+        # Combobox para el año de vencimiento
+        self.label_anio_vencimiento = tk.Label(self, text="Año de vencimiento")
+        self.label_anio_vencimiento.grid(row=17, column=0, padx=5, pady=5)
+        self.comboAnioVencimiento = ttk.Combobox(self, state="readonly", values=["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"])
+        self.comboAnioVencimiento.grid(row=17, column=1, padx=5, pady=5)
 
+        # Combobox para emisor
+        self.label_tipo_tarjeta = tk.Label(self, text="Emisor")
+        self.label_tipo_tarjeta.grid(row=18, column=0, padx=5, pady=5)
+        self.comboTipoTarjeta = ttk.Combobox(self, state="readonly", values=["Visa", "Mastercard", "American Express"])
+        self.comboTipoTarjeta.grid(row=18, column=1, padx=5, pady=5)
 
+        # Boton para mostrar los atributos del objeto telefono de la clase TelefonoCelular
+        self.boton_mostrar = tk.Button(self, text="Realizar pago", command=self.pago)
+        self.boton_mostrar.grid(row=19, column=0, columnspan=2, pady=10)
 
         # Centramos los widgets
-        self.grid_columnconfigure(0, weight=2)
+        self.grid_columnconfigure(0, weight=3)
+
+    def pago(self):
+        # Creamos un objeto de la clase abstract VentaMovil
+        self.venta_movil = VentaMovil()
+
+        # se invoca al metodo revisar_pago de la clase abstracta VentaMovil se le pasa como parametro el attributo precio_total del objeto telefono de la clase Telefonocelular
+        if self.venta_movil.revisarPromocion(self.telefono.precio_total):
+            showinfo("Pago exitoso", "El pago se realizó correctamente")
+        
+
+
+        # asignamos los valores de los cuadros de texto a los atributos del objeto cliente de la clase Cliente
+        self.cliente.nombre = self.entry_nombre.get()
+        self.cliente.apellido_paterno = self.entry_apellido_paterno.get()
+        self.cliente.apellido_materno = self.entry_apellido_materno.get()
+        self.cliente.correo_electronico = self.entry_correo_electronico.get()
+        self.cliente.telefono = self.entry_telefono.get()
+        
+        # Asignamos los valores bancarios a variables locales de la función mostrar
+        banco = self.comboBanco.get()
+        numero_tarjeta = self.entry_numero_tarjeta.get()
+        digito_verificador = self.entry_digito_verificador.get()
+        mes_vencimiento = self.comboMesVencimiento.get()
+        anio_vencimiento = self.comboAnioVencimiento.get()
+        tipo_tarjeta = self.comboTipoTarjeta.get()
+
+        # creamos variable llamada tarjeta_socio que será generada aleatoriamente
+        tarjeta_socio = str(random.randint(1000000000000000, 9999999999999999))
+
+        # Mostramos en un cuador de dialogo mostrando todos los datos de compra
+        showinfo("Datos de compra", "Nombre: " + self.cliente.nombre + " " + self.cliente.apellido_paterno + " " + self.cliente.apellido_materno )
+
+
+
+
+
+
 
 # Método principal del programa
 def main():
