@@ -279,7 +279,7 @@ class App(tk.Frame):
             elif (combo_sel := self.comboAlmacenamiento.get()) == "64 gb":
                 self.precio = 16499
             elif (combo_sel := self.comboAlmacenamiento.get()) == "128 gb":
-                self.precio = 19, 499
+                self.precio = 19499
         elif (combo_sel := self.comboModelo.get()) == "iPhone 11":
             if (combo_sel := self.comboAlmacenamiento.get()) == "32 gb":
                 self.precio = 10900
@@ -623,10 +623,6 @@ class Interfaz2(tk.Frame, TelefonoCelular):
         # Creamos un objeto de la clase abstract VentaMovil
         self.venta_movil = VentaMovil()
 
-        # se invoca al metodo revisar_pago de la clase abstracta VentaMovil se le pasa como parametro el attributo precio_total del objeto telefono de la clase Telefonocelular
-        if self.venta_movil.revisarPromocion(self.telefono.precio_total):
-            showinfo("Pago exitoso", "El pago se realizó correctamente")
-
         # asignamos los valores de los cuadros de texto a los atributos del objeto cliente de la clase Cliente
         self.cliente.nombre = self.entry_nombre.get()
         self.cliente.apellido_paterno = self.entry_apellido_paterno.get()
@@ -645,9 +641,18 @@ class Interfaz2(tk.Frame, TelefonoCelular):
         # creamos variable llamada tarjeta_socio que será generada aleatoriamente
         tarjeta_socio = str(random.randint(1000000000000000, 9999999999999999))
 
-        # Mostramos en un cuador de dialogo mostrando todos los datos de compra
-        showinfo("Datos de compra",
-                 "Nombre: " + self.cliente.nombre + " " + self.cliente.apellido_paterno + " " + self.cliente.apellido_materno)
+        # Se invoca al metodo revisar_pago de la clase abstracta VentaMovil se le pasa como parametro el attributo precio_total del objeto telefono de la clase Telefonocelular
+        if self.venta_movil.revisarPromocion(self.telefono.precio_total):
+            # Creamos un label que indica que se le aplico un bono de $500 en compra de accesorios a su numero de tarjeta
+            self.label_promocion = tk.Label(self,
+                                            text=f" Gracias por su compra {self.cliente.nombre}. \nSe le aplico un bono de $500 en compra de accesorios \na su tarjeta con número: " + tarjeta_socio)
+            # aumentamos la fuente del label y cambiamos el color de la fuente
+            self.label_promocion.config(font=("Arial", 20), fg="red", )
+            self.label_promocion.grid(row=20, column=0, columnspan=2, pady=10)
+
+        # Mostramos un cuadro de dialogo de que la compra fue exitosa
+        showinfo("Felicitaciones",
+                 f"Usted ha adquirido un nuevo telefono celular {self.telefono.marca} {self.telefono.modelo} por un total de ${self.telefono.precio_total}")
 
 
 # Método principal del programa
