@@ -12,6 +12,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter.messagebox import *
+from datetime import datetime
 
 
 # Creamos una clase abstracta llamada VentaMovil con un método llamado revisarPromocion
@@ -228,7 +229,7 @@ class App(tk.Frame):
         self.label_seguro = tk.Label(self, text="")
         self.label_seguro.grid(row=15, column=0)
 
-        # Centramos los combobox    
+        # Centramos los combobox
         self.grid_columnconfigure(0, weight=1)
 
         # Checkbox solicitados
@@ -258,7 +259,7 @@ class App(tk.Frame):
     def comprar(self):
 
         root = tk.Tk()
-        root.geometry("725x725")
+        root.geometry("825x825")
         root.resizable(False, False)
 
         # Creamos un titulo con formato
@@ -270,8 +271,6 @@ class App(tk.Frame):
         Interfaz2(root, self.telefono.marca, self.telefono.modelo, self.telefono.color,
                   self.telefono.capacidad_almacenamiento, self.telefono.precio, self.telefono.plan_renta,
                   self.telefono.seguro, self.telefono.precio_total).pack(expand=True, fill=tk.BOTH)
-
-        print("Total a pagar")
 
         root.mainloop()
 
@@ -525,7 +524,7 @@ class App(tk.Frame):
             self.telefono.precio_total = self.telefono.precio + self.telefono.seguro
             self.label_seguro.config(
                 text=f"\nElegiste no contratar el seguro, \ntoma en cuenta que en caso de robo o extravío u algún otro incidente \nno podrás reclamar el equipo.\nEl precio total del equipo + seguro es de ${self.telefono.precio} mxn + ${self.telefono.seguro} mxn = ${self.telefono.precio_total} mxn\nConsulta términos y condiciones")
-        print(self.telefono)
+        # print(self.telefono)
 
 
 # Clase Interfaz2 que genera la segunda ventana solicitada
@@ -592,7 +591,7 @@ class Interfaz2(tk.Frame, TelefonoCelular):
         self.entry_numero_tarjeta = tk.Entry(self)
         self.entry_numero_tarjeta.grid(row=13, column=1, padx=5, pady=5)
 
-        # Campo de texto digito verificador 
+        # Campo de texto digito verificador
         self.label_digito_verificador = tk.Label(self, text="Digito verificador")
         self.label_digito_verificador.grid(row=15, column=0, padx=5, pady=5)
         self.entry_digito_verificador = tk.Entry(self)
@@ -628,8 +627,42 @@ class Interfaz2(tk.Frame, TelefonoCelular):
         self.boton_regresar = tk.Button(self, text="Regresar", command=self.regresar)
         self.boton_regresar.grid(row=20, column=0, columnspan=2, pady=10)
 
+        # Agregamos el boton Generar archivo de compra
+        self.boton_generar_archivo = tk.Button(self, text="Generar archivo de compra", command=self.generar_archivo)
+        self.boton_generar_archivo.grid(row=21, column=0, columnspan=2, pady=10)
+
         # Centramos los widgets
         self.grid_columnconfigure(0, weight=3)
+
+    def generar_archivo(self):
+        # Ruta del archivo de compras "/Users/sergiocastelarfernandez/Documents/Proyectos python/Informatica_V/U6_ACT2/compras.txt"
+        # Nombre del archivo: compras.txt
+
+        fh_consulta = datetime.now()  # fecha y hora de la escritura del archivo
+        fecha = str(fh_consulta.date())  # fecha de la escritura del archivo
+        hora = str(fh_consulta.strftime("%H:%M:%S"))
+
+        # Craeamos una lista con los datoa a cargar en el archivo de texto
+        datos = [self.cliente.nombre, " ", self.cliente.apellidoPaterno, " ", self.cliente.apellidoMaterno, " ", fecha,
+                 " ", hora, " ", self.telefono.marca, " ", self.telefono.modelo, " ", self.telefono.color, " ",
+                 self.telefono.precio_total, "\n"]
+
+        # Abrimos el archivo en modo de escritura
+        for dato in datos:
+            with open("/Users/sergiocastelarfernandez/Documents/Proyectos python/Informatica_V/U6_ACT2/compras.txt",
+                      "a") as file:
+                file.write(str(dato))
+
+        # Mostramos un cuadro de dialogo preguntando si desea ver el detalle de la compra
+        respuesta = messagebox.askyesno("Detalle de la compra", "¿Desea ver el detalle de la compra?")
+        if respuesta:
+            # Abrimos el archivo en modo de lectura
+            with open("/Users/sergiocastelarfernandez/Documents/Proyectos python/Informatica_V/U6_ACT2/compras.txt",
+                      "r") as file:
+                # Mostramos el la ultima linea del archivo de texto
+                messagebox.showinfo("Detalle de la compra", file.readlines()[-1])
+                # Imprimimos el archivo en la consola
+                print(file.read())
 
     def regresar(self):
         # Cerramos la ventana
@@ -641,9 +674,9 @@ class Interfaz2(tk.Frame, TelefonoCelular):
 
         # asignamos los valores de los cuadros de texto a los atributos del objeto cliente de la clase Cliente
         self.cliente.nombre = self.entry_nombre.get()
-        self.cliente.apellido_paterno = self.entry_apellido_paterno.get()
-        self.cliente.apellido_materno = self.entry_apellido_materno.get()
-        self.cliente.correo_electronico = self.entry_correo_electronico.get()
+        self.cliente.apellidoPaterno = self.entry_apellido_paterno.get()
+        self.cliente.apellidoMaterno = self.entry_apellido_materno.get()
+        self.cliente.correoElectronico = self.entry_correo_electronico.get()
         self.cliente.telefono = self.entry_telefono.get()
 
         # Asignamos los valores bancarios a variables locales de la función mostrar
