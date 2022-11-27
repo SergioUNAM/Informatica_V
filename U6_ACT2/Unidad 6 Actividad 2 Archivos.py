@@ -659,10 +659,10 @@ class Interfaz2(tk.Frame, TelefonoCelular):
             # Abrimos el archivo en modo de lectura
             with open("/Users/sergiocastelarfernandez/Documents/Proyectos python/Informatica_V/U6_ACT2/compras.txt",
                       "r") as file:
-                # Mostramos el la ultima linea del archivo de texto
+                # Imprimimos el contenido del archivo en la consola
                 messagebox.showinfo("Detalle de la compra", file.readlines()[-1])
-                # Imprimimos el archivo en la consola
-                print(file.read())
+                with open("/Users/sergiocastelarfernandez/Documents/Proyectos python/Informatica_V/U6_ACT2/compras.txt", "r") as file:
+                    print(file.read())
 
     def regresar(self):
         # Cerramos la ventana
